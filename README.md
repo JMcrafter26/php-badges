@@ -11,3 +11,9 @@ A simple php Badge generator, like [shields.io](https://shields.io) to generate 
 <img alt="HEX color support" src="https://test.jm26.net/api/badge/?label=HEX%20color&message=support&color=0596a3">
 <img alt="Statistics" src="https://test.jm26.net/api/badge/statistics">
 
+## Working on:
+
+- <img src="https://test.jm26.net/api/badge/?message=%E2%98%BB&label=Fontawesome%20support&color=red">
+- <img src="https://test.jm26.net/api/badge/?label=Web&message=GUI&color=blue">
+- <img src="https://test.jm26.net/api/badge/?label=JSON&message=input&color=yellow">
+- Better Quality 🥶
