@@ -1,6 +1,6 @@
 # badges
 <img alt="Banner" src=".github/banner.jpg">
-A simple php Badge generator, like [shields.io](https://shields.io) to generate cool little Badges.
+A simple php Badge generator, like <a href="https://shields.io" target="_blank">shields.io</a> to generate cool little Badges.
 
 <hr>
 
