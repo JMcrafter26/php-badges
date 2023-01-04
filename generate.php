@@ -2,7 +2,7 @@
 
 /**
  * Generate a badge image using PHP GD
- * Author: @JMcrafter26 | https://test.jm26.net/shields-badges | https://github.com/JMcrafter26/badges
+ * Author: @JMcrafter26 | https://test.jm26.net/shields-badges | https://github.com/JMcrafter26/cool-badges
  * License: MIT
  * Version: 1.0.2 
  * (c) 2023 JM26.NET
