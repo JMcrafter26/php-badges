@@ -1,4 +1,5 @@
 # badges
+<img alt="Banner" src=".github/banner.JPEG">
 A simple php Badge generator, like [shields.io](https://shields.io) to generate cool little Badges.
 
 <hr>
