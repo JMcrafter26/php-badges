@@ -25,4 +25,4 @@ $count = $data['count'];
 //display badge
 header('Content-Type: image/png');
 readfile('https://test.jm26.net/api/badge?label=Times%20Generated&message=' . $count . '&color=blue');
-?>
+?> 
