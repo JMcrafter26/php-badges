@@ -13,7 +13,7 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 ![HEX color support](https://test.jm26.net/api/badge/?label=HEX%20color&message=support&color=0596a3)
 ![Statistics](https://test.jm26.net/api/badge/statistics)
 
-<a href="https://test.jm26.net/api/badge/statistics" target="_blank">View statistics↗</a>
+<a href="https://test.jm26.net/api/badge/statistics?accuratecount=true" target="_blank">View statistics↗</a>
 
 ## Features 🌟
 
