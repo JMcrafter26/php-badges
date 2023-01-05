@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Generate URL for PHP Script</title>
+    <!-- include bootstrap 4.4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Generate URL for PHP Script</h1>
+        <form>
+            <!-- label input -->
+            <div class="form-group">
+                <label for="labelInput">Label</label>
+                <input type="text" class="form-control" id="labelInput" placeholder="Documentation:">
+            </div>
+            <!-- message input -->
+            <div class="form-group">
+                <label for="messageInput">Message</label>
+                <input type="text" class="form-control" id="messageInput" placeholder="go.jm26.net/badge-docs">
+            </div>
+            <!-- color input -->
+            <div class="form-group">
+                <label for="colorInput">Color</label>
+                <input type="text" class="form-control" id="colorInput" placeholder="e.g. green / important / #97CA00">
+            </div>
+            <!-- image format input -->
+            <div class="form-group">
+                <label for="formatInput">Image Format</label>
+                <select class="form-control" id="formatInput">
+                    <option>png</option>
+                    <option>jpg</option>
+                    <option>gif</option>
+                </select>
+            </div>
+            <!-- scale input -->
+            <div class="form-group">
+                <label for="scaleInput">Scale</label>
+                <input type="number" class="form-control" id="scaleInput" placeholder="20">
+            </div>
+            <!-- resize output input -->
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="resizeOutputInput">
+                <label class="form-check-label" for="resizeOutputInput">Resize Output (Badge will be 20px high, but will loose quality)</label>
+            </div>
+            <!-- generate button -->
+            <button type="button" class="btn btn-primary" onclick="generateUrl()">Generate</button>
+        </form>
+        <!-- display generated url -->
+        <div class="mt-3">
+<h4>Preview:</h4>
+<div id="imgTagView">Please click the generate button to get a preview</div>
+<br/>
+            <h4>Generated URL:</h4>
+            <input type="text" class="form-control" id="urlOutput" readonly>
+        </div>
+        <!-- display img tag -->
+        <div class="mt-3">
+            <h4>IMG Tag:</h4>
+            
+            <input type="text" class="form-control" id="imgTagOutput" readonly>
+        </div>
+    </div>
+    <!-- javascript to generate url and img tag -->
+    <script>
+function generateUrl() {
+    // get input values
+    var label = document.getElementById('labelInput').value;
+    var message = document.getElementById('messageInput').value;
+    var color = document.getElementById('colorInput').value;
+color = color.replace('#','');
+    var format = document.getElementById('formatInput').value;
+    var scale = document.getElementById('scaleInput').value;
+    var resizeOutput = document.getElementById('resizeOutputInput').checked;
+
+    // construct url
+    var url = 'https://test.jm26.net/api/badge?g';
+    if (label) {
+        url += '&label=' + label;
+    }
+    if (message) {
+        url += '&message=' + message;
+    }
+    if (color) {
+        url += '&color=' + color;
+    }
+    if (format) {
+        url += '&format=' + format;
+    }
+    if (scale) {
+        url += '&scale=' + scale;
+    }
+    url += '&resizeoutput=' + resizeOutput;
+
+    // display url
+    document.getElementById('urlOutput').value = url;
+
+    // construct img tag
+    var imgTag = '<img src="' + url + '" height="20px">';
+
+// construct img tag
+    var imgTagView = '<img src="' + url + '" height="20px" alt="Please refresh the page, if the error occurs anyway, open an issue on Guthub">';
+
+    // display img tag
+    document.getElementById('imgTagOutput').value = imgTag;
+    document.getElementById('imgTagView').innerHTML = imgTagView;
+}
+
+    </script>
+</body>
+</html>
