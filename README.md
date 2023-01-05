@@ -1,4 +1,4 @@
-# badges
+# PHP-Badges
 <img alt="Banner" src=".github/banner.jpg">
 A simple php Badge generator, like <a href="https://shields.io" target="_blank">shields.io</a> to generate cool little Badges.
 
@@ -11,6 +11,8 @@ A simple php Badge generator, like <a href="https://shields.io" target="_blank">
 <img alt="No input limit!" src="https://test.jm26.net/api/badge/?label=No%20input&message=LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!&color=yellowgreen">
 <img alt="HEX color support" src="https://test.jm26.net/api/badge/?label=HEX%20color&message=support&color=0596a3">
 <img alt="Statistics" src="https://test.jm26.net/api/badge/statistics">
+<a href="https://test.jm26.net/api/badge/statistics" target="_Blank">View statistics</a>
+
 
 ## Working on:
 
