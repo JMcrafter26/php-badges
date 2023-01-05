@@ -6,23 +6,25 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 <hr>
 
 ## Examples 💡
-<img alt="coming soon!" src="https://test.jm26.net/api/badge?label=Coming&message=soon!&color=green">
-<img alt="Supports multiple formats!" src="https://test.jm26.net/api/badge/?format=jpg&label=Supports&message=multiple%20formats&color=orange">
-<img alt="Just enable images!!" src="https://test.jm26.net/api/badge/?label=More%20cool%20features&message=coming%20soon!&color=violet">
-<img alt="No input limit!" src="https://test.jm26.net/api/badge/?label=No%20input&message=LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!&color=yellowgreen">
-<img alt="HEX color support" src="https://test.jm26.net/api/badge/?label=HEX%20color&message=support&color=0596a3">
-<img alt="Statistics" src="https://test.jm26.net/api/badge/statistics">
-<a href="https://test.jm26.net/api/badge/statistics" target="_Blank">View statistics</a>
+![coming soon!](https://test.jm26.net/api/badge?label=Coming&message=soon!&color=green)
+![Supports multiple formats!](https://test.jm26.net/api/badge/?format=jpg&label=Supports&message=multiple%20formats&color=orange)
+![More Features on the way!](https://test.jm26.net/api/badge/?label=More%20cool%20features&message=on%20the%20way!&color=violet)
+![No input limit!](https://test.jm26.net/api/badge/?label=No%20input&message=LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!&color=yellowgreen)
+![HEX color support](https://test.jm26.net/api/badge/?label=HEX%20color&message=support&color=0596a3)
+![Statistics](https://test.jm26.net/api/badge/statistics)
+
+<a href="https://test.jm26.net/api/badge/statistics" target="_blank">View statistics↗</a>
 
 ## Features 🌟
 
 - Very simple 😌
 - Many features 🤯
-- Lightweight (minified ~3kb) 💪
+- Lightweight (minified ~4kb) 💪
 - Highly customizable 🎨
 - Host it yourself! (Or use mine) 🌐
 - No setup required, just upload and go 🚀
 - More coming soon! 🔜
+- All Feature and Usage Instructions listed [here](https://github.com/JMcrafter26/php-badges/wiki/Features-and-Usage) 📑
 
 ## Working on 👨‍💻
 
