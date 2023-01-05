@@ -31,4 +31,6 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 - <img src="https://test.jm26.net/api/badge/?message=%E2%98%BB&label=Fontawesome%20support&color=red">
 - <img src="https://test.jm26.net/api/badge/?label=Web&message=GUI&color=blue">
 - <img src="https://test.jm26.net/api/badge/?label=JSON&message=input&color=yellow">
-- Better Quality 🥶
+## Better Quality 🥶 
+![Why is this so BIG?](https://test.jm26.net/api/badge/?resizeoutput=false&label=Why%20is%20this%20so&message=BIG??&color=critical)
+<img height="20px" src="https://test.jm26.net/api/badge/?resizeoutput=false&scale=20&label=I%20think%20I&message=fixed%20it&color=ok">
