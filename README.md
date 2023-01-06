@@ -26,6 +26,10 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 - More coming soon! 🔜
 - All Feature and Usage Instructions listed [here](https://github.com/JMcrafter26/php-badges/wiki/Features-and-Usage) 📑
 
+
+## [Badge Generator ↗](https://jmcrafter26.github.io/php-badges/generate)
+The site allows you to generate a Badge very easy and with a simple GUI.
+
 ## Working on 👨‍💻
 
 - <img src="https://test.jm26.net/api/badge/?message=%E2%98%BB&label=Fontawesome%20support&color=red&resizeoutput=false" height="20px" alt="Fontawesome support">
