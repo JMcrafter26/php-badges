@@ -6,7 +6,8 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 <hr>
 
 ## Examples 💡
-<img src="https://test.jm26.net/api/badge?label=Coming&message=soon!&color=green&resizeoutput=false" height="20px" alt="Coming soon!">
+<img src="https://test.jm26.net/api/badge?g&label=PHP&message=Badges&format=png&resizeoutput=false" height="20px">
+<img src="https://test.jm26.net/api/badge?g&label=Own&message=Badges&color=C60B8A&format=png&resizeoutput=false" height="20px">
 <img src="https://test.jm26.net/api/badge/?format=jpg&label=Supports&message=multiple%20formats&color=orange&resizeoutput=false" height="20px" alt="Supports multiple formats">
 <img src="https://test.jm26.net/api/badge/?label=More%20cool%20features&message=on%20the%20way!&color=violet&resizeoutput=false" height="20px" alt="More Features on the way">
 <img src="https://test.jm26.net/api/badge/?label=No%20input&message=LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!&color=brightgreen&resizeoutput=false&scale=35" height="20px" alt="No input limit">
