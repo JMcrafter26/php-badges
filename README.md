@@ -9,7 +9,7 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 <img src="https://test.jm26.net/api/badge?label=Coming&message=soon!&color=green&resizeoutput=false" height="20px" alt="Coming soon!">
 <img src="https://test.jm26.net/api/badge/?format=jpg&label=Supports&message=multiple%20formats&color=orange&resizeoutput=false" height="20px" alt="Supports multiple formats">
 <img src="https://test.jm26.net/api/badge/?label=More%20cool%20features&message=on%20the%20way!&color=violet&resizeoutput=false" height="20px" alt="More Features on the way">
-<img src="https://test.jm26.net/api/badge/?label=No%20input&message=LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!&color=yellowgreen&resizeoutput=false&scale=35" height="20px" alt="No input limit">
+<img src="https://test.jm26.net/api/badge/?label=No%20input&message=LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!&color=brightgreen&resizeoutput=false&scale=35" height="20px" alt="No input limit">
 <img src="https://test.jm26.net/api/badge/?label=HEX%20color&message=support&color=0596a3&resizeoutput=false" height="20px" alt="HEX color support">
 <img src="https://test.jm26.net/api/badge/statistics?resizeoutput=false" height="20px" alt="Statistics">
 
