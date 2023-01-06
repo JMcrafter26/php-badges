@@ -29,6 +29,7 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 ## Working on 👨‍💻
 
 - <img src="https://test.jm26.net/api/badge/?message=%E2%98%BB&label=Fontawesome%20support&color=red&resizeoutput=false" height="20px" alt="Fontawesome support">
+For now please just use the unicode charset (copy&paste 😉) <img src="https://test.jm26.net/api/badge?g&label=Coffee&message=%E2%98%95&color=Yellowgreen&format=png&resizeoutput=false" height="20px">
 - <img src="https://test.jm26.net/api/badge/?label=Web&message=GUI&color=blue&resizeoutput=false" height="20px" alt="Web GUI">
 - <img src="https://test.jm26.net/api/badge/?label=JSON&message=input&color=yellow&resizeoutput=false" height="20px" alt="JSON input">
 - ![Better Quality](https://test.jm26.net/api/badge/?resizeoutput=true&label=Better&message=Quality&color=critical)
