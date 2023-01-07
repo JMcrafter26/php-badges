@@ -4,7 +4,7 @@
  * Generate a badge image using PHP GD
  * Author: @JMcrafter26 | https://test.jm26.net/shields-badges | https://github.com/JMcrafter26/php-badges
  * License: MIT
- */ $Version = '1.1.2'; /*
+ */ $Version = '1.1.3'; /*
  * (c) 2023 JM26.NET
  */
 
@@ -13,7 +13,7 @@
 /*-----------------------------------------------------------------------*/
 
 
-/* Usage: https://test.jm26.net/api/badge?label=Label&message=Message&color=Color&fontcolor=FontColor&format=Format
+/* 
 Parameters:
 * label: The text that will be displayed on the left side of the badge.
 * message: The text that will be displayed on the right side of the badge.
@@ -25,28 +25,70 @@ Parameters:
 
 
 
-/* Setting the default values for the badge. */
+/*------------------SETTINGS--------------------*/
+/*   Edit the settings below to change the      */
+/*      default settings of the badge.          */
+/*------------------SETTINGS--------------------*/
+
+// Maintenance mode
+$maintenace = false; // If this is set to true, the generator will display a maintenance badge.
+$maintenacePassword = 'password'; // The password for the maintenance badge.
+// Default text
 $label = 'Documentation:';
 $message = 'go.jm26.net/badge-docs';
+// Default colors
 $labelColor = '#555555';
 $messageColor = '#97CA00';
 $colorText = '#ffffff';
+$autoFontColor = true;
+// Advanced settings
 $imageFormat = 'png'; // Default image format (png, jpg, gif)
 $chacheLife = 5; // Default cache life (in seconds)
-$roundedCorner = 5; // This does not work yet :(
+$scale = 20; //Image scale (Higher = Better quality, but bigger file size.)
+$resizeOutput = false; //Downscale the output image to the original size. (!Reduces quality!)
+$font = './DejaVuSans.woff'; // Download from https://dejavu-fonts.github.io
+
+
+/*----------------------------------------------*/
+/* Do not edit anything below this line unless  */
+/*      you know what you are doing!            */
+/*----------------------------------------------*/
+
+//Check if the maintenance mode is enabled
+if($maintenace == true && $_GET['password'] != $maintenacePassword) {
+        header('Content-Type: image/png');
+        readfile('https://i.imgur.com/iR3RI3Q.png'); // Download this image from https://test.jm26.net/api/badge/notice.png if imgur took it down.
+        header('HTTP/1.0 503 Service Unavailable');
+        die();
+}
 
 /* This is checking if the label and message are set. If they are, it will set the label and message to
 the value of the label and message. */
 if (isset($_GET['label'])) {
     $label = $_GET['label'];
+    $label = htmlspecialchars($label);
 }
 if (isset($_GET['message'])) {
     $message = $_GET['message'];
+    $message = htmlspecialchars($message);
+
 }
 if (isset($_GET['format'])) {
     $imageFormat = $_GET['format'];
     $imageFormat = strtolower($imageFormat);
-
+}
+if (isset($_GET['scale'])) {
+    $scale = $_GET['scale'];
+    if (!is_numeric($scale) || $scale > 100) {
+        $scale = 20;
+    }
+}
+if (isset($_GET['resizeoutput'])) {
+    if ($_GET['resizeoutput'] == 'true') {
+        $resizeOutput = true;
+    } else {
+        $resizeOutput = false;
+    }
 }
 
 //Set default colors, like shields.io
@@ -60,9 +102,11 @@ $color_lightgrey = '#9f9f9f';
 $color_cyan = '#00eaff';
 $color_blue = '#007ec6';
 $color_violet = '#7b16ff';
+$color_pink = '#ff69b4';
 $color_grey = '#555555';
 $color_silver = '#9f9f9f';
 $color_success = '#44cc11';
+$color_ok = '#97CA00';
 $color_important = '#fe7d37';
 $color_critical = '#e05d44';
 $color_informational = '#007ec6';
@@ -105,15 +149,21 @@ if (isset($_GET['fontcolor']) && $_GET['fontcolor'] != '') {
     }
 }
 
+// auto font color
+if ($_GET['autofontcolor'] == 'false') {
+    $autoFontColor = false;
+} elseif ($_GET['autofontcolor'] == 'true') {
+    $autoFontColor = true;
+}
+
 /* This is setting the font, font color, and the size of the badge. */
-$font = './DejaVuSans.ttf';
-$bbox = imagettfbbox(9, 0, $font, $label);
+$bbox = imagettfbbox((9 * $scale), 0, $font, $label); //b
 $labelWidth = $bbox[2] - $bbox[0];
-$labelWidth += 5;
-$bbox = imagettfbbox(9, 0, $font, $message);
+$labelWidth += (5 * $scale); //b
+$bbox = imagettfbbox((9 * $scale), 0, $font, $message); //b
 $messageWidth = $bbox[2] - $bbox[0];
-$imWidth = $labelWidth + $messageWidth + 15;
-$imHeight = 20;
+$imWidth = $labelWidth + $messageWidth + (15 * $scale); //b
+$imHeight = (20 * $scale); //b
 
 
 /* Creating a new image with the width and height of the badge. */
@@ -129,16 +179,17 @@ $labelColor = imagecolorallocate($im, hexdec(substr($labelColor, 1, 2)), hexdec(
 
 /* Creating the badge. */
 imagefilledrectangle($im, 0, 0, $imWidth, $imHeight, $messageColor);
-imagefilledrectangle($im, 0, 0, $labelWidth + 5, $imHeight, $labelColor);
+imagefilledrectangle($im, 0, 0, $labelWidth + (5 * $scale), $imHeight, $labelColor);
 
 
 
 /* Creating the text on the badge. */
-$bbox = imagettfbbox(9, 0, $font, $label);
+$bbox = imagettfbbox((9 * $scale), 0, $font, $label); //b
 $textWidth = $bbox[2] - $bbox[0];
-imagettftext($im, 9, 0, 5, 14, $colorText, $font, $label);
+imagettftext($im, (9 * $scale), 0, (5 * $scale), (14* $scale), $colorText, $font, $label); //b
 
-if($_GET['autofontcolor'] != true and $_GET['fontcolor'] == '') {
+
+if($_GET['fontcolor'] == '' && $autoFontColor == true) {
 $brightness = (hexdec(substr($messageColorHex, 1, 2)) * 0.299) + (hexdec(substr($messageColorHex, 3, 2)) * 0.587) + (hexdec(substr($messageColorHex, 5, 2)) * 0.114);
 if ($brightness > 165) {
     $colorText = imagecolorallocate($im, 0, 0, 0);
@@ -147,13 +198,33 @@ if ($brightness > 165) {
 }
 }
 
-
-$bbox = imagettfbbox(9, 0, $font, $message);
+$bbox = imagettfbbox((9 * $scale), 0, $font, $message); //b
 $textWidth = $bbox[2] - $bbox[0];
-imagettftext($im, 9, 0, $labelWidth + 10, 14, $colorText, $font, $message);
+imagettftext($im, (9 * $scale), 0, $labelWidth + (10 * $scale), (14 * $scale), $colorText, $font, $message); //b
 
 /* Setting the cache life. */
 header('Cache-Control: max-age=' . $chacheLife . ', public');
+
+
+
+// Downsizing the image, without losing quality.
+/* resize using this method:
+$originalImage = imagecreatefrompng('original.png');
+$resizedImage = imagecreatetruecolor(300, 200); // new width and height
+imagecopyresampled($resizedImage, $originalImage, 0, 0, 0, 0, 300, 200, imagesx($originalImage), imagesy($originalImage));
+*/
+if($resizeOutput == true) {
+$resizedImage = imagecreatetruecolor(($imWidth / $scale), ($imHeight / $scale));
+imagecopyresampled($resizedImage, $im, 0, 0, 0, 0, ($imWidth / $scale), ($imHeight / $scale), $imWidth, $imHeight);
+$im = $resizedImage;
+}
+
+// Check if image is valid and output header 200 or 400
+if($imWidth > 0 && $imHeight > 0) {
+    header('HTTP/1.1 200 OK');
+} else {
+    header('HTTP/1.1 400 Bad Request');
+}
 
 /* Setting the content type to image/png and then outputting the image. */
 if($imageFormat == 'png') {
@@ -170,15 +241,18 @@ if($imageFormat == 'png') {
     imagepng($im);
 }
 
+
+
+
 /* Destroying the image. (This is not needed, but it is good practice.) */
 imagedestroy($im);
 
-
+// Tell client that request was successful
 
 // ---Statistics & Update Reminder---
 // Please do not remove or change this code. It is used to count the number of times a badge has been generated and to remind you to update PHP Badges.
-// No personal data is stored.
-$statistics = true; // Counts the number of times a badge has been generated. No personal data is stored.
+// No personal data is stored or sent to the server!
+$statistics = true; // Counts the number of times a badge has been generated.
 if ($statistics) {
     $statisticsUrl = 'https://test.jm26.net/api/badge/statistics.php?exp=' . md5('statistics' . date('h-i-d-m-Y')) . '&v=' . $Version;
     $statistics = file_get_contents($statisticsUrl);
