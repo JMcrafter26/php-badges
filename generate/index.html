@@ -1,17 +1,16 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <title>PHP-Badges Generator</title>
+    <title>Generate URL for PHP Script</title>
     <!-- include bootstrap 4.4 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="container mt-5">
-        <h1>PHP-Badges Generator</h1>
-        <hr>
-        <p><img src="https://test.jm26.net/api/badge?g&label=!&message=INFO&color=Orange&format=png&resizeoutput=false" height="20px"> I recommend using <a href="https://test.jm26.net/badge-generator" target="_blank">this page ↗</a> because it uses the latest version. Thank you!</p>
+        <h1>Generate URL for PHP Script</h1>
         <form>
             <!-- label input -->
             <div class="form-group">
@@ -26,91 +25,483 @@
             <!-- color input -->
             <div class="form-group">
                 <label for="colorInput">Color</label>
-                <input type="text" class="form-control" id="colorInput" placeholder="e.g. green / important / #97CA00">
+                <!-- text input and color picker are linked and update each other, also the color picker is set to the color of the text input. Important: fields are cleared when the page is refreshed -->
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="colorInputPrepend">#</span>
+                    </div>
+                    <input type="text" class="form-control" id="colorInput" placeholder="green / important / #97CA00" aria-describedby="colorInputPrepend">
+                    <input type="color" class="form-control" id="colorInputPicker" value="#97CA00">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="colorInputClear" onclick="document.getElementById('colorInput').value = ''; document.getElementById('colorInputPicker').value = '#97CA00';"><i class="fas fa-times"></i></button>
+                    </div>
+
+                </div>
             </div>
-            <!-- image format input -->
-            <div class="form-group">
-                <label for="formatInput">Image Format</label>
-                <select class="form-control" id="formatInput">
-                    <option>png</option>
-                    <option>jpg</option>
-                    <option>gif</option>
-                </select>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="advancedOptionsModal" tabindex="-1" role="dialog" aria-labelledby="advancedOptionsModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="advancedOptionsModalLabel">Advanced Options</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h4> Format & Scale </h4>
+                            <div class="form-group">
+                                <label for="formatInput">Image Format</label>
+                                <select class="form-control" id="formatInput">
+                                    <option>png</option>
+                                    <option>jpg</option>
+                                    <option>gif</option>
+                                </select>
+                            </div>
+                            <!-- Scale range slider  min="1" max="100" default="20" show value -->
+                            <div class="form-group">
+                                <label for="scaleInput">Scale</label>
+                                <input type="range" class="form-control-range" id="scaleInput" min="1" max="100" value="20">
+                            </div>
+
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="resizeOutputInput">
+                                <label class="form-check-label" for="resizeOutputInput">Resize Output (Badge will be 20px high, but will loose quality)</label>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="imgAlways20pxInput" checked>
+                                <label class="form-check-label" for="imgAlways20pxInput">Image Tag will always be 20px high (even if the badge is resized)</label>
+                            </div>
+                            <h4> Font Color </h4>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="autofontcolorInput" checked>
+                                <label class="form-check-label" for="autofontcolorInput">Auto Font Color (Font color will be white or black depending on the background color. Does not work with custom font colors)</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="fontColorInput">Font Color</label>
+                                <input type="text" class="form-control" id="fontColorInput" placeholder="e.g. red / #000000">
+                            </div>
+                            <h4> Alt Text (for screen readers) </h4>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="altTextInput" checked>
+                                <label class="form-check-label" for="altTextInput">Automatically generate alt text</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="altTextCustomInput">Custom Alt Text</label>
+                                <input type="text" class="form-control" id="altTextCustomInput" placeholder="e.g. Documentation: go.jm26.net/badge-docs">
+                            </div>
+                            <h4> Other </h4>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="betaInput" style="color: red;">
+                                <label class="form-check-label" for="betaInput" style="color: red;">Beta (This is a beta feature. It may not work as expected)</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetAdvancedOptions()">Reset</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="applyAdvancedOptions()">Apply</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- scale input -->
-            <div class="form-group">
-                <label for="scaleInput">Scale</label>
-                <input type="number" class="form-control" id="scaleInput" placeholder="20">
-            </div>
-            <!-- resize output input -->
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="resizeOutputInput">
-                <label class="form-check-label" for="resizeOutputInput">Resize Output (Badge will be 20px high, but will loose quality)</label>
-            </div>
+
             <!-- generate button -->
-            <button type="button" class="btn btn-primary" onclick="generateUrl()">Generate</button>
+            <div style="display: flex; margin-top: 10px;">
+                <button type="button" class="btn btn-primary" onclick="generateUrl()" id="generateButton" style="width: 90%;"><i class="fa-solid fa-arrows-rotate"></i> Generate </button>
+                <!-- Button trigger modal -->
+                <button type="button" data-toggle="modal" data-target="#advancedOptionsModal" class="btn btn-light" style="width: 10%; margin-left: 10px;"><i class="fas fa-cog"></i></button>
+            </div>
+
         </form>
+        <hr style="color: grey; height: 2px;">
         <!-- display generated url -->
         <div class="mt-3">
-<h4>Preview:</h4>
-<div id="imgTagView">Please click the generate button to get a preview</div>
-<br/>
+            <h4>Preview:</h4>
+            <div id="imgError" style="color: red;"></div>
+            <div id="imgHeightWarn"></div>
+            <div id="imgTagView">Please click the generate button to get a preview</div>
+            <br />
             <h4>Generated URL:</h4>
-            <input type="text" class="form-control" id="urlOutput" readonly>
+            <div style="display: flex; align-items: center;">
+                <input type="text" class="form-control" id="urlOutput" readonly style="width: 80%;" onclick="this.select();" placeholder="Generated URL will be displayed here">
+                <!-- Copy button is on the right side of the input field -->
+                <button class="btn btn-primary" onclick="copyUrl()" style="margin-left: 10px; width: 20%;"><i class="fa-solid fa-clipboard"></i></button>
+            </div>
         </div>
         <!-- display img tag -->
         <div class="mt-3">
             <h4>IMG Tag:</h4>
-            
-            <input type="text" class="form-control" id="imgTagOutput" readonly>
+            <div style="display: flex; align-items: center;">
+                <input type="text" class="form-control" id="imgTagOutput" readonly onclick="this.select();" style="width: 80%;" placeholder="Generated IMG Tag will be displayed here">
+                <button class="btn btn-primary" onclick="copyImgTag()" style="margin-left: 10px; width: 20%;"><i class="fa-solid fa-clipboard"></i></button>
+            </div>
         </div>
     </div>
-    <p style="text-align: center;">Version 1.1.2</p>
-    <!-- javascript to generate url and img tag -->
+    <hr style="color: grey; height: 2px;">
+    <br />
+    <!-- Decode Input URL and fill in the form -->
+    <div class="container mt-5">
+        <h1>Decode URL</h1>
+        <!-- url input -->
+        <div class="form-check" style="display: inline-block;">
+            <!-- Auto generate checkbox -->
+            <div class="form-check" style="display: inline-block; margin-left: 10px;">
+                <input class="form-check-input" type="checkbox" value="" id="autoGenerateInput">
+                <label class="form-check-label" for="autoGenerateInput">Auto Generate URL and IMG Tag</label>
+            </div>
+        </div>
+        <div class="form-group" style="display: flex; align-items: center;">
+            <input type="text" class="form-control" id="DecodeurlInput" placeholder="Paste URL to decode here" style="width: 80%;">
+            <button class="btn btn-primary" onclick="decodeUrl()" id="decodeButton" style="margin-left: 10px; width: 20%;">Decode URL</button>
+        </div>
+
+    </div>
+    <p style="text-align: center;">Version 1.1.4</p>
+
+
+    <!-- Just some JS to make the page work -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.6/dist/umd/popper.min.js" integrity="sha384-t8h1tf2QTJTc/F3L3t80/F+lBtTzTdvjD9RX8sO2kb0jlYfhjq3WcH80Gg0AuAa" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Advanced Options Storage -->
     <script>
-function generateUrl() {
-    // get input values
-    var label = document.getElementById('labelInput').value;
-    var message = document.getElementById('messageInput').value;
-    var color = document.getElementById('colorInput').value;
-color = color.replace('#','');
-    var format = document.getElementById('formatInput').value;
-    var scale = document.getElementById('scaleInput').value;
-    var resizeOutput = document.getElementById('resizeOutputInput').checked;
+        // reset advanced options
+        function resetAdvanced() {
+            document.getElementById('formatInput').value = 'png';
+            document.getElementById('scaleInput').value = '';
+            document.getElementById('scaleInput').disabled = true;
+            document.getElementById('resizeOutput').checked = false;
+            document.getElementById('imgAlways20pxInput').checked = true;
+            document.getElementById('fontColorInput').value = '';
+            document.getElementById('fontColorInput').disabled = true;
+            document.getElementById('autofontcolorInput').checked = true;
+            document.getElementById('altTextInput').checked = true;
+            document.getElementById('altTextCustomInput').value = '';
+            document.getElementById('altTextCustomInput').disabled = true;
+            document.getElementById('betaInput').checked = false;
+        }
 
-    // construct url
-    var url = 'https://test.jm26.net/api/badge?g';
-    if (label) {
-        url += '&label=' + label;
-    }
-    if (message) {
-        url += '&message=' + message;
-    }
-    if (color) {
-        url += '&color=' + color;
-    }
-    if (format) {
-        url += '&format=' + format;
-    }
-    if (scale) {
-        url += '&scale=' + scale;
-    }
-    url += '&resizeoutput=' + resizeOutput;
+        // save advanced options to local storage
+        function applyAdvancedOptions() {
+            //save advanced options to local storage as json
+            localStorage.setItem('format', document.getElementById('formatInput').value);
+            localStorage.setItem('scale', document.getElementById('scaleInput').value);
+            localStorage.setItem('resizeOutput', document.getElementById('resizeOutput').checked);
+            localStorage.setItem('imgAlways20px', document.getElementById('imgAlways20pxInput').checked);
+            localStorage.setItem('fontColor', document.getElementById('fontColorInput').value);
+            localStorage.setItem('autofontcolor', document.getElementById('autofontcolorInput').checked);
+            localStorage.setItem('altText', document.getElementById('altTextInput').checked);
+            localStorage.setItem('altTextCustom', document.getElementById('altTextCustomInput').value);
+            localStorage.setItem('beta', document.getElementById('betaInput').checked);
 
-    // display url
-    document.getElementById('urlOutput').value = url;
 
-    // construct img tag
-    var imgTag = '<img src="' + url + '" height="20px">';
+        }
 
-// construct img tag
-    var imgTagView = '<img src="' + url + '" height="20px" alt="Please refresh the page, if the error occurs anyway, open an issue on Guthub">';
-
-    // display img tag
-    document.getElementById('imgTagOutput').value = imgTag;
-    document.getElementById('imgTagView').innerHTML = imgTagView;
-}
-
+        // load advanced options from local storage
+        function loadAdvancedOptions() {
+            document.getElementById('formatInput').value = localStorage.getItem('format');
+            document.getElementById('scaleInput').value = localStorage.getItem('scale');
+            document.getElementById('resizeOutput').checked = localStorage.getItem('resizeOutput');
+            document.getElementById('imgAlways20pxInput').checked = localStorage.getItem('imgAlways20px');
+            document.getElementById('imgAlways20pxInput').checked = localStorage.getItem('imgAlways20px');
+            document.getElementById('fontColorInput').value = localStorage.getItem('fontColor');
+            document.getElementById('autofontcolorInput').checked = localStorage.getItem('autofontcolor');
+            document.getElementById('altTextInput').checked = localStorage.getItem('altText');
+            document.getElementById('altTextCustomInput').value = localStorage.getItem('altTextCustom');
+            document.getElementById('betaInput').checked = localStorage.getItem('beta');
+        }
     </script>
+
+    <!-- Decode URL -->
+    <script>
+        function decodeUrl() {
+            // clear input fields
+            document.getElementById('labelInput').value = '';
+            document.getElementById('messageInput').value = '';
+            document.getElementById('colorInput').value = '';
+
+            // Get the query string from the URL
+            const queryString = document.getElementById('DecodeurlInput').value;
+
+            // Decode the query string
+            const decodedQueryString = decodeURIComponent(queryString);
+
+            // Split the query string into an array of key-value pairs
+            const queryParams = decodedQueryString.split('&');
+
+            // Iterate over the array of key-value pairs
+            queryParams.forEach(function(param) {
+
+
+                // Split each key-value pair into an array
+                const paramParts = param.split('=');
+                // Get the key and value from the array
+                const key = paramParts[0];
+                const value = paramParts[1];
+
+
+
+
+                // Check if the key matches one of the form inputs
+                if (key === 'label') {
+                    document.getElementById('labelInput').value = value;
+                } else if (key === 'message') {
+                    document.getElementById('messageInput').value = value;
+                } else if (key === 'color') {
+                    document.getElementById('colorInput').value = value;
+                    // color picker
+                    document.getElementById('colorInputPicker').value = '#' + value;
+                } else if (key === 'format') {
+                    document.getElementById('formatInput').value = value;
+                } else if (key === 'scale') {
+                    document.getElementById('scaleInput').value = value;
+                } else if (key === 'fontcolor') {
+                    document.getElementById('fontColorInput').value = value;
+                    document.getElementById('autofontcolorInput').checked = false;
+                    document.getElementById('fontColorInput').disabled = false;
+                } else if (key === 'autofontcolor') {
+                    document.getElementById('autofontcolorInput').checked = value;
+                } else if (key === 'resizeoutput') {
+                    document.getElementById('resizeOutputInput').checked = value;
+                } else if (key === 'beta') {
+                    document.getElementById('betaInput').checked = value;
+                }
+            });
+
+            // if input is an imagetag, check for alt text
+            if (queryString.includes('<img') || queryString.includes('<IMG') || queryString.includes('<Img')) {
+                // get alt text
+                var altText = queryString.match(/alt="([^"]*)"/)[1];
+                // if alt text is not empty, set alt text input to true
+                if (altText != '') {
+                    document.getElementById('altTextInput').checked = false;
+                    document.getElementById('altTextCustomInput').value = altText;
+                    document.getElementById('altTextCustomInput').disabled = false;
+                }
+            }
+
+
+            // Change button text to "Decoded!" for 3 seconds
+            var decodeButton = document.getElementById("decodeButton");
+            decodeButton.innerHTML = "Decoded!";
+            setTimeout(function() {
+                decodeButton.innerHTML = "Decode URL";
+            }, 3000);
+
+            // If auto-generate is checked, generate the badge
+            if (document.getElementById('autoGenerateInput').checked) {
+                generateUrl();
+            }
+        }
+    </script>
+
+
+    <!-- Disable fields if checkbox is checked -->
+    <script>
+        // if alt text is enabled, disable custom alt text input
+        document.getElementById('altTextInput').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('altTextCustomInput').disabled = true;
+            } else {
+                document.getElementById('altTextCustomInput').disabled = false;
+            }
+        });
+        // if autofontcolor is enabled, disable font color input
+        document.getElementById('autofontcolorInput').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('fontColorInput').disabled = true;
+            } else {
+                document.getElementById('fontColorInput').disabled = false;
+            }
+        });
+        // if resize output is enabled, disable scale input
+        document.getElementById('resizeOutputInput').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('scaleInput').disabled = true;
+            } else {
+                document.getElementById('scaleInput').disabled = false;
+            }
+        });
+
+
+        // on load, disable custom alt text input and font color input if the checkbox is checked
+        window.onload = function() {
+            if (document.getElementById('altTextInput').checked) {
+                document.getElementById('altTextCustomInput').disabled = true;
+            }
+            if (document.getElementById('autofontcolorInput').checked) {
+                document.getElementById('fontColorInput').disabled = true;
+            }
+            if (document.getElementById('resizeOutputInput').checked) {
+                document.getElementById('scaleInput').disabled = true;
+            }
+            document.getElementById('betaInput').checked = false;
+            document.getElementById('betaInput').disabled = true;
+        }
+    </script>
+
+    <!-- Color Picker -->
+    <script>
+        // sync color input and color picker
+        document.getElementById('colorInput').addEventListener('change', function() {
+            document.getElementById('colorInputPicker').value = this.value;
+        });
+        document.getElementById('colorInputPicker').addEventListener('change', function() {
+            document.getElementById('colorInput').value = this.value;
+        });
+    </script>
+
+
+    <!-- Generate URL and IMG Tag -->
+    <script>
+        function generateUrl() {
+            // get input values
+            var label = document.getElementById('labelInput').value;
+            var message = document.getElementById('messageInput').value;
+            var color = document.getElementById('colorInput').value;
+            color = color.replace('#', '');
+            var format = document.getElementById('formatInput').value;
+            var scale = document.getElementById('scaleInput').value;
+            var resizeOutput = document.getElementById('resizeOutputInput').checked;
+            var fontColor = document.getElementById('fontColorInput').value;
+            fontColor = fontColor.replace('#', '');
+            var autofontcolor = document.getElementById('autofontcolorInput').checked;
+            var beta = document.getElementById('betaInput').checked;
+            var altText = document.getElementById('altTextInput').checked;
+            var altTextCustom = document.getElementById('altTextCustomInput').value;
+
+            // construct url
+            if (beta) {
+                var url = 'https://test.jm26.net/api/badge/beta?g';
+            } else {
+                var url = 'https://test.jm26.net/api/badge?g';
+            }
+            if (label) {
+                url += '&label=' + encodeURIComponent(label);
+            }
+            if (message) {
+                url += '&message=' + encodeURIComponent(message);
+            }
+            if (color) {
+                url += '&color=' + color;
+            }
+            if (format) {
+                url += '&format=' + format;
+            }
+            if (scale) {
+                url += '&scale=' + scale;
+            }
+            if (fontColor) {
+                url += '&fontcolor=' + fontColor;
+            }
+            // if autofontcolor is disabled, add autofontcolor=false to url
+            if (!autofontcolor) {
+                url += '&autofontcolor=false';
+            }
+            url += '&resizeoutput=' + resizeOutput;
+
+            // display url
+            document.getElementById('urlOutput').value = url;
+
+            // if imgAlways20pxInput is checked, set width and height to 20px
+            if (document.getElementById('imgAlways20pxInput').checked) {
+                // if auto alt text is enabled, add auto alt text, if auto alt text is disabled, add custom alt text, if custom alt text is empty and auto alt text is disabled, don't add alt text to img tag
+                if (altText) {
+                    var altText = label + ' ' + message;
+                    var imgTag = '<img src="' + url + '" height="20px" alt="' + altText + '">';
+                } else if (altTextCustom) {
+                    var imgTag = '<img src="' + url + '" height="20px" alt="' + altTextCustom + '">';
+                } else {
+                    var imgTag = '<img src="' + url + '" height="20px">';
+                }
+                document.getElementById('imgHeightWarn').innerHTML = '';
+                var imgTagView = '<img src="' + url + '" height="20px" alt="Please refresh the page, if the error occurs anyway, open an issue on GitHub">';
+            } else {
+                // if auto alt text is enabled, add auto alt text, if auto alt text is disabled, add custom alt text, if custom alt text is empty and auto alt text is disabled, don't add alt text to img tag
+                if (altText) {
+                    var altText = label + ' ' + message;
+                    var imgTag = '<img src="' + url + '" alt="' + altText + '">';
+                } else if (altTextCustom) {
+                    var imgTag = '<img src="' + url + '" alt="' + altTextCustom + '">';
+                } else {
+                    var imgTag = '<img src="' + url + '">';
+                }
+                document.getElementById('imgHeightWarn').innerHTML = '<p color="red">Image size in preview is 20px (because of accessibility reasons). Generated <img> Tag is not affected by this.</p><br>';
+                var imgTagView = '<img src="' + url + '"height="20px" alt="Please refresh the page, if the error occurs anyway, open an issue on GitHub">';
+            }
+
+            // display img tag
+            document.getElementById('imgTagOutput').value = imgTag;
+            document.getElementById('imgTagView').innerHTML = imgTagView;
+
+            // Wait for image to load, if image is not found, display error message
+            var img = new Image();
+            img.onload = function() {
+                document.getElementById('imgTagView').innerHTML = imgTagView;
+            };
+            img.onerror = function() {
+                document.getElementById('imgTagView').innerHTML = 'Error: Image not found. Please check your input values.';
+            };
+
+            document.getElementById('generateButton').disabled = true;
+            //set text of button to "generating" for 3 seconds and make the font awesome icon spin
+            document.getElementById('generateButton').innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Generating...';
+            setTimeout(function() {
+                document.getElementById('generateButton').disabled = false;
+                document.getElementById('generateButton').innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Generate URL and IMG Tag';
+            }, 3000);
+
+        }
+    </script>
+
+    <!-- Copy to clipboard -->
+    <script>
+        function copyUrl() {
+            var copyText = document.getElementById("urlOutput");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            // change button text to "copied" for 2 seconds
+            var copyButton = document.getElementById("copyButton");
+            copyButton.innerHTML = "✔";
+            setTimeout(function() {
+                copyButton.innerHTML = "<i class='fa fa-solid fa-clipboard'></i>";
+            }, 2000);
+        }
+
+        function copyImgTag() {
+            var copyText = document.getElementById("imgTagOutput");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            // change button text to "copied" for 2 seconds
+            var copyButton = document.getElementById("copyImgTagButton");
+            copyButton.innerHTML = "✔";
+            setTimeout(function() {
+                copyButton.innerHTML = "<i class='fa fa-solid fa-clipboard'></i>";
+            }, 2000);
+        }
+    </script>
+
+    <!-- Image Error Handling -->
+    <script>
+        var image = new Image();
+        image.src = url;
+
+        image.onerror = function() {
+            // image failed to load, display error message
+            document.getElementById("imgError").innerHTML = "Error: Image failed to load";
+        };
+
+        image.onload = function() {
+            // image loaded, display image
+            document.getElementById("imgError").innerHTML = "";
+            document.getElementById("imgTagView").innerHTML = imgTagView;
+        };
+    </script>
+
+
 </body>
 </html>
