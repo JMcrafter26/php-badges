@@ -46,3 +46,7 @@ For now please just use the unicode charset (copy&paste 😉) <img src="https://
 </div>
 
 - <img src="https://test.jm26.net/api/badge/?label=Web&message=GUI&color=blue&resizeoutput=false" height="20px" alt="Web GUI">
+
+## Thanks to
+- [DejaVu Fonts](https://dejavu-fonts.github.io/) for the awesfont
+- [icons8](https://icons8.com) for the super cool icons
