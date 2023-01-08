@@ -24,6 +24,7 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 - Many features 🤯
 - Lightweight (minified ~4kb) 💪
 - Highly customizable 🎨
+- Create Badges using a simple Web GUI 📌
 - Host it yourself! (Or use mine) 🌐
 - No setup required, just upload and go 🚀
 - More coming soon! 🔜
