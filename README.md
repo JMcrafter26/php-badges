@@ -52,5 +52,7 @@ For now please just use the unicode charset (copy&paste 😉) <img src="https://
 - <img src="https://test.jm26.net/api/badge/?label=Web&message=GUI&color=blue&resizeoutput=false" height="20px" alt="Web GUI">
 
 ## Thanks to
+- Me [(JMcrafter26)](https://test.jm26.net/list) for the code 😁
 - [DejaVu Fonts](https://dejavu-fonts.github.io/) for the awesfont
 - [icons8](https://icons8.com) for the super cool icons
+- [Font Awesome](https://fontawesome.com) for the icons on the badges
