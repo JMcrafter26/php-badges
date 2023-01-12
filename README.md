@@ -39,7 +39,10 @@ The site allows you to generate a Badge very easy and with a simple GUI.🧩
 - <img src="https://test.jm26.net/api/badge/?message=%E2%98%BB&label=Fontawesome%20support&color=red&resizeoutput=false" height="20px" alt="Fontawesome support">
 For now please just use the unicode charset (copy&paste 😉) <img src="https://test.jm26.net/api/badge?g&label=Coffee&message=%E2%98%95&color=Yellowgreen&format=png&resizeoutput=false" height="20px">
 - <img src="https://test.jm26.net/api/badge/?label=JSON&message=input&color=yellow&resizeoutput=false" height="20px" alt="JSON input">
+
+
 ### Almost Finished 🙌:
+- <img src="https://test.jm26.net/api/badge/beta?g&label=Font%20Awesome&icon=f425&message=support!&color=618CD1&format=png&scale=20&resizeoutput=false" height="20px" alt="Font Awesome support!">
 <div style="display: inline-block;">
   • <img src="https://test.jm26.net/api/badge?g&label=Better&message=Quality&color=critical&format=png&resizeoutput=false" height="20px">
 
