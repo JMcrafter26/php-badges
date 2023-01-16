@@ -44,7 +44,7 @@ For now please just use the unicode charset (copy&paste 😉) <img src="https://
 ### Almost Finished 🙌:
 - <img src="https://test.jm26.net/api/badge/beta?g&label=Font%20Awesome&icon=f425&message=support!&color=618CD1&format=png&scale=20&resizeoutput=false" height="20px" alt="Font Awesome support!">
 <div style="display: inline-block;">
-  • <img src="https://test.jm26.net/api/badge?g&label=Better&message=Quality&color=critical&format=png&resizeoutput=false" height="20px">
+  • <img src="https://test.jm26.net/api/badge?g&label=Better&message=Quality&color=critical&format=png&resizeoutput=true" height="20px">
 
 <img src="https://test.jm26.net/api/badge?g&label=I%20improved%20the&message=~QUALITY~&color=Pink&format=png&resizeoutput=false" height="20px">
 </div>
