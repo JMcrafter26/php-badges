@@ -55,6 +55,6 @@ For now please just use the unicode charset (copy&paste 😉) <img src="https://
 
 ## Thanks to
 - Me [(JMcrafter26)](https://test.jm26.net/list) for the code 😁
-- [DejaVu Fonts](https://dejavu-fonts.github.io/) for the awesfont
+- [DejaVu Fonts](https://dejavu-fonts.github.io/) for the nice font
 - [icons8](https://icons8.com) for the super cool icons
 - [Font Awesome](https://fontawesome.com) for the icons on the badges
