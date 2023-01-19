@@ -3,7 +3,7 @@
 ## 19. Jan 2023
 
 I forgot about the change log 💀💀, but here is my progress:
-- Added and testing Fontawesome icons in badge
+- Added and testing Fontawesome icons on badge
 - Safer and better statistics.php and update reminder
 - Maintenance Mode and other error reports added
 - Small bug fixea
