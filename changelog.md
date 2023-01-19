@@ -1,5 +1,13 @@
 # Changelog <img src="https://test.jm26.net/api/badge?g&label=Change&message=Log&color=0062cc&format=png&scale=20&autofontcolor=true&resizeoutput=false" height="20px" alt="Change Log">
 
+## 19. Jan 2023
+
+I forgot about the change log 💀💀, but here is my progress:
+- Added and testing Fontawesome icons in badge
+- Safer and better statistics.php and update reminder
+- Maintenance Mode and other error reports added
+- Small bug fixea
+
 ## 06. Jan 2023
 
 - Created GUI [Visit](https://jmcrafter26.github.io/php-badges/generate)
