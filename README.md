@@ -61,4 +61,4 @@ For now please just use the unicode charset (copy&paste 😉) <img src="https://
 
 <br/>
 
-<img src="https://test.jm26.net/api/php-badges-views/views.png" height="20px" >
+<img src="https://test.jm26.net/api/php-badges-views" height="20px" >
