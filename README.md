@@ -58,3 +58,7 @@ For now please just use the unicode charset (copy&paste 😉) <img src="https://
 - [DejaVu Fonts](https://dejavu-fonts.github.io/) for the nice font
 - [icons8](https://icons8.com) for the super cool icons
 - [Font Awesome](https://fontawesome.com) for the icons on the badges
+
+<br/>
+
+<img src="https://test.jm26.net/api/php-badges-views/views.png" height="20px" >
