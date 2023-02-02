@@ -27,7 +27,7 @@ A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-ba
 - Lightweight (minified ~4kb) 💪
 - Highly customizable 🎨
 - Create Badges using a simple [Web GUI](https://test.jm26.net/Badge-generator) 📌
-- Host it yourself! (Or [use mine](https://github.com/JMcrafter26/php-badges/wiki/Get-started-(without-server)) 🌐
+- Host it yourself! (Or [use mine](https://github.com/JMcrafter26/php-badges/wiki/Get-started-(without-server)) 🌐)
 - No setup required, just upload and go 🚀
 - More coming soon! 🔜
 - All Feature and Usage Instructions listed [here](https://github.com/JMcrafter26/php-badges/wiki/Features-and-Usage) 📑
