@@ -1,4 +1,4 @@
-# Changelog <img src="https://test.jm26.net/api/badge?g&label=Change&message=Log&color=0062cc&format=png&scale=20&autofontcolor=true&resizeoutput=false" height="20px" alt="Change Log">
+# Changelog <img src="https://api.jm26.net/badge?g&label=Change&message=Log&color=0062cc&format=png&scale=20&autofontcolor=true&resizeoutput=false" height="20px" alt="Change Log">
 
 ## 19. Jan 2023
 
@@ -13,7 +13,7 @@ I forgot about the change log 💀💀, but here is my progress:
 - Created GUI [Visit](https://jmcrafter26.github.io/php-badges/generate)
 <div style="display: inline-block;">
 
-- New GUI version created [here](https://test.jm26.net/badge-generator/)   <img src="https://test.jm26.net/api/badge?g&label=It's%20super&message=simple!&color=61fffc&format=png&scale=20&resizeoutput=false" height="20px" alt="It's super simple!">
+- New GUI version created [here](https://test.jm26.net/badge-generator/)   <img src="https://api.jm26.net/badge?g&label=It's%20super&message=simple!&color=61fffc&format=png&scale=20&resizeoutput=false" height="20px" alt="It's super simple!">
 
 </div>
 
@@ -41,6 +41,12 @@ I forgot about the change log 💀💀, but here is my progress:
 
 - Started with the Project
 - First structure
+- Added Basic elements
+- Added Parameter support
+- Added Statistics support
+
+
+
 - Added Basic elements
 - Added Parameter support
 - Added Statistics support
