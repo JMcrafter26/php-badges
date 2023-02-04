@@ -7,3 +7,6 @@ A 🔧 simple PHP Badge generator, like <a href="https://shields.io" target="_bl
 
 ## [Visit Generator ↗](https://jmcrafter26.github.io/php-badges/generate)
 The site allows you to generate a Badge very easy and with a simple GUI.
+
+
+<img src="https://test.jm26.net/api/php-badges-views" height="20px" >
