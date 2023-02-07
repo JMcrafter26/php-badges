@@ -5,4 +5,5 @@ theme: just-the-docs
 url: https://jmcrafter26.github.io/php-badges
 
 aux_links:
-  Download: https://github.com/JMcrafter26/php-badges/releases/latest
+  Github: https://github.com/JMcrafter26/php-badges
+  Download PHP-Badges: https://github.com/JMcrafter26/php-badges/releases/latest
