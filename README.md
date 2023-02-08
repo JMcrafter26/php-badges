@@ -26,7 +26,7 @@ A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-ba
 - Many [features](https://github.com/JMcrafter26/php-badges/wiki/Features-and-Usage) 🤯
 - Lightweight 💪
 - Highly customizable 🎨
-- Font Awesome icon support 🤪
+- Font Awesome icon support <img height="20" src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/brands/font-awesome.svg?sanitize=true" alt="Font Awesome" style="vertical-align: middle;">
 - Create Badges using a simple [Web GUI](https://test.jm26.net/Badge-generator) 📌
 - Host it yourself! (Or [use mine](https://github.com/JMcrafter26/php-badges/wiki/Get-started-(without-server)) 🌐)
 - No setup required, just upload and go 🚀
@@ -39,14 +39,12 @@ The site allows you to generate a Badge very easy and with a simple GUI.🧩
 
 ## Working on 👨‍💻
 
-- <img src="https://api.jm26.net/badge/?message=%E2%98%BB&label=Fontawesome%20support&color=red&resizeoutput=false" height="20px" alt="Fontawesome support">
-For now please just use the unicode charset (copy&paste 😉) <img src="https://api.jm26.net/badge?g&label=Coffee&message=%E2%98%95&color=Yellowgreen&format=png&resizeoutput=false" height="20px">
 - <img src="https://api.jm26.net/badge/?label=JSON&message=input&color=yellow&resizeoutput=false" height="20px" alt="JSON input">
 
 
 ### Almost Finished 🙌:
 
-- <img src="https://api.jm26.net/badge/?label=Web&message=GUI&color=blue&resizeoutput=false" height="20px" alt="Web GUI">
+- 
 
 ## Thanks to
 - Me [(JMcrafter26)](https://test.jm26.net/list) for the code 😁
