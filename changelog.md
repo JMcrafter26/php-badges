@@ -1,5 +1,17 @@
 # Changelog <img src="https://api.jm26.net/badge?g&label=Change&message=Log&color=0062cc&format=png&scale=20&autofontcolor=true&resizeoutput=false" height="20px" alt="Change Log">
 
+## 08. Feb 2023
+
+Managed to create a new release 
+- Font Awesome Brands Support added! <img height="20" src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/brands/font-awesome.svg?sanitize=true" alt="Font Awesome" style="vertical-align: middle;">
+- Added Label color support (because why not?)
+- Automatic Font Download (No need to copy more than one file Huray!)
+- Added error messages (For a better user experience)
+- New update notification system (More accurate and less annoying)
+- New cache system (Less memory usage)
+- HTTP header file name generation added
+- New Web UI (Now supports the new features, like the icon picker or the label color picker)
+
 ## 19. Jan 2023
 
 I forgot about the change log 💀💀, but here is my progress:
