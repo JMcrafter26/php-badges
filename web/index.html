@@ -1,0 +1,1276 @@
+<!-- URL and Tag generator for PHP-Badges -->
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Generate URL for PHP-Badges</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details summary::before {
+            content: "\f105";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 5px;
+        }
+
+        details[open] summary::before {
+            content: "\f107";
+        }
+
+        /* Add a transition to the icon */
+        details summary::before {
+            transition: transform 0.3s ease;
+        }
+
+        /* Rotate the icon when the details are open */
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        #iconList {
+            height: 400px;
+            overflow-y: scroll;
+            /* Modern scrollbars */
+            scrollbar-width: thin;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+            -webkit-overflow-scrolling: touch;
+            /* Round the corners */
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+
+        }
+
+        .icon {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 50px;
+            line-height: 50px;
+            margin: 0 10px 10px 0;
+            text-align: center;
+            width: 55px;
+        }
+
+        .icon:hover {
+            background-color: #ddd;
+        }
+
+                                        /* Replace the default bullets with hearts */
+                                        .heart-list {
+                                    list-style-type: none;
+                                    padding-left: 0;
+                                }
+
+                                .heart-list li::before {
+                                    content: "❤️";
+                                    padding-right: 5px;
+                                }
+
+    </style>
+
+</head>
+
+<body>
+    <script>
+        var version = '1.3.3';
+    </script>
+
+    <!-- toast -->
+    <div class="toast d-flex align-items-center text-white bg-primary border-0 mt-2" role="alert" aria-live="assertive"
+        aria-atomic="true" id="displayToast" data-delay="5000" data-autohide="true"
+        style="position: fixed; top: 0; right: 20px; z-index: 9999;">
+        <div class="toast-body">
+            <span id="toastMessage"></span>
+        </div>
+        <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast"
+            aria-label="Close"></button>
+    </div>
+
+    <div class="container mt-5">
+        <h1>Generate URL for PHP-Badges <i class="fas fa-code"></i></h1>
+        <p class="lead">This tool generates a URL for the PHP Script. You can use this URL to create a badge for your
+            project.</p>
+        <p class="info">This project is open source and you can even host yourself <i class="fa fa-grin-stars"></i>.
+            Click <a href="https://github.com/JMcrafter26/php-badges">here</a> to visit the GitHub repository and learn
+            more.</p>
+        <hr class="mb-5">
+
+        <form>
+            <!-- label input -->
+            <div class="form-group">
+                <label for="labelInput" style="margin-right: 10px;">Label
+                    <!-- scroll to #faq3 and expand the accordion item to learn more about the label --> <a href="#faq3"
+                        data-toggle="expand" data-target="#faq3" data-parent="#faq" aria-expanded="false"
+                        aria-controls="faq3"><i class="fas fa-question-circle"></i></a> <div id="newBagde"></div></label>
+                <div id="labelInputDiv" style="display: flex;">
+                    <input type="text" class="form-control" id="labelInput" placeholder="Documentation:"
+                        style="width: 120%;">
+                    <div id="iconInputDiv" class="input-group" style="display: flex; width: 30%;">
+                        <input type="text" class="form-control" id="iconInput" placeholder="Icon e.g. f09b"
+                            style="margin-left: 10px; width: 60%;">
+                        <div class="input-group-append" style="width: 40px; left: -10px;">
+                            <button class="btn btn-outline-secondary" type="button" id="iconButton" data-toggle="modal"
+                                data-target="#iconModal"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- message input -->
+            <div class="form-group">
+                <label for="messageInput">Message</label>
+                <input type="text" class="form-control" id="messageInput" placeholder="go.jm26.net/badge-docs">
+            </div>
+            <!-- color input -->
+            <div class="form-group">
+                <label for="colorInput">Message Box Color</label>
+                <!-- text input and color picker are linked and update each other, also the color picker is set to the color of the text input. Important: fields are cleared when the page is refreshed -->
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="colorInputPrepend">#</span>
+                    </div>
+                    <input type="text" class="form-control" id="colorInput" placeholder="green / important / #97CA00"
+                        aria-describedby="colorInputPrepend">
+                    <input type="color" class="form-control" id="colorInputPicker" value="#97CA00">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="colorInputClear"
+                            onclick="document.getElementById('colorInput').value = ''; document.getElementById('colorInputPicker').value = '#97CA00';"><i
+                                class="fas fa-times"></i></button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="advancedOptionsModal" tabindex="-1" role="dialog"
+                aria-labelledby="advancedOptionsModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="advancedOptionsModalLabel">Advanced Options</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h4> Format & Scale </h4>
+                            <div class="form-group">
+                                <label for="formatInput">Image Format</label>
+                                <select class="form-control" id="formatInput">
+                                    <option>png</option>
+                                    <option>jpg</option>
+                                    <option>gif</option>
+                                </select>
+                            </div>
+                            <!-- Scale range slider  min="1" max="100" default="20" show value -->
+                            <div class="form-group">
+                                <label for="scaleInput">Scale</label>
+                                <input type="range" class="form-control-range" id="scaleInput" min="1" max="100"
+                                    value="20">
+                            </div>
+
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="resizeOutputInput">
+                                <label class="form-check-label" for="resizeOutputInput">Resize Output (Badge will be
+                                    20px high, but will loose quality)</label>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="imgAlways20pxInput" checked>
+                                <label class="form-check-label" for="imgAlways20pxInput">Image Tag will always be 20px
+                                    high (even if the badge is resized)</label>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="alignInLineInput">
+                                <label class="form-check-label" for="alignInLineInput">Align Badge (adds display:
+                                    inline-block to the image tag)</label>
+                            </div>
+                            <h4> Font Color </h4>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="autofontcolorInput" checked>
+                                <label class="form-check-label" for="autofontcolorInput">Auto Font Color (Font color
+                                    will be white or black depending on the background color. Does not work with custom
+                                    font colors)</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fontColorInput">Font Color</label>
+                                <input type="text" class="form-control" id="fontColorInput"
+                                    placeholder="e.g. red / #000000">
+                            </div>
+                            <div id="labelColorInputDiv">
+                                <h4> Label Box Color <div id="newBadge"></div></h4>
+                                <!-- Color input like the one above, but just for the label box color -->
+                                <div class="form-group">
+                                    <label for="labelColorInput">Label Box Color</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="labelColorInputPrepend">#</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="labelColorInput"
+                                            placeholder="grey / #555555" aria-describedby="labelColorInputPrepend">
+                                        <input type="color" class="form-control" id="labelColorInputPicker"
+                                            value="#555555">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" type="button"
+                                                id="labelColorInputClear"
+                                                onclick="document.getElementById('labelColorInput').value = ''; document.getElementById('labelColorInputPicker').value = '#555555';"><i
+                                                    class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4> Alt Text (for screen readers) </h4>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="altTextInput" checked>
+                                <label class="form-check-label" for="altTextInput">Automatically generate alt
+                                    text</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="altTextCustomInput">Custom Alt Text</label>
+                                <input type="text" class="form-control" id="altTextCustomInput"
+                                    placeholder="e.g. Documentation: go.jm26.net/badge-docs">
+                            </div>
+                            <h4> Other </h4>
+                            <div class="form-group form-check" id="cacheInputDiv">
+                                <input type="checkbox" class="form-check-input" id="cacheInput">
+                                <label class="form-check-label" for="cacheInput">Cache (This will make the badge load
+                                    faster, but will not update if you change the settings) <div id="newBadge"></div></label>
+                                <input type="number" class="form-control" id="cacheTimeInput"
+                                    placeholder="Cache Time (in seconds)" list="cacheTimeInputList" value="3600" min="1"
+                                    max="2592000">
+                                <label for="cacheTimeInput" id="cacheTimeInputLabel">Cache Time (in seconds)</label>
+                                <datalist id="cacheTimeInputList">
+                                    <option value="1" label="1 second">
+                                    <option value="5" label="5 seconds">
+                                    <option value="10" label="10 seconds">
+                                    <option value="30" label="30 seconds">
+                                    <option value="60" label="1 minute">
+                                    <option value="300" label="5 minutes">
+                                    <option value="600" label="10 minutes">
+                                    <option value="1800" label="30 minutes">
+                                    <option value="3600" label="1 hour">
+                                    <option value="21600" label="6 hours">
+                                    <option value="43200" label="12 hours">
+                                    <option value="86400" label="1 day">
+                                    <option value="259200" label="3 days">
+                                    <option value="604800" label="1 week">
+                                    <option value="2592000" label="1 month">
+                                </datalist>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="everythingToUrlInput">
+                                <label class="form-check-label" for="everythingToUrlInput">Save everything to URL (This
+                                    will make the URL very long)</label>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="betaInput" style="color: red;">
+                                <label class="form-check-label" for="betaInput" style="color: red;">Beta (This is a beta
+                                    feature. It may not work as expected)</label>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="showNewBadgeInput" checked>
+                                <label class="form-check-label" for="showNewBadgeInput">Show "<span class="badge badge-pill badge-info" >New</span>" badge on new features</label>
+                                </div> 
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="resetAdvancedOptions()">Reset</button>
+                            <button type="button" onclick="saveAdvanced()" class="btn btn-primary"
+                                data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- generate button -->
+            <div style="display: flex; margin-top: 10px;">
+                <button type="button" class="btn btn-primary" onclick="generateUrl()" id="generateButton"
+                    style="width: 100%;"><i class="fa-solid fa-arrows-rotate"></i> Generate </button>
+                <!-- Button trigger modal -->
+                <button type="button" data-toggle="modal" data-target="#advancedOptionsModal" class="btn btn-light"
+                    style="width: 15%; margin-left: 10px;"><i class="fas fa-cog"></i></button>
+            </div>
+
+        </form>
+        <hr class="my-4" />
+        <!-- display generated url -->
+        <div class="mt-3">
+            <h4>Preview:</h4>
+            <div id="imgError" style="color: red;"></div>
+            <div id="imgHeightWarn"></div>
+            <div id="imgTagView">Please click the generate button to get a preview</div>
+            <br />
+            <h4>Generated URL:</h4>
+            <div style="display: flex; align-items: center;">
+                <input type="text" class="form-control" id="urlOutput" readonly style="width: 80%;"
+                    onclick="this.select();" placeholder="Generated URL will be displayed here">
+                <!-- Copy button is on the right side of the input field -->
+                <button class="btn btn-primary" onclick="copyUrl()" style="margin-left: 10px; width: 20%;"
+                    id="copyURLButton"><i class="fa-solid fa-clipboard"></i></button>
+            </div>
+        </div>
+        <!-- display img tag -->
+        <div class="mt-3">
+            <h4>IMG Tag:</h4>
+            <div style="display: flex; align-items: center;">
+                <input type="text" class="form-control" id="imgTagOutput" readonly onclick="this.select();"
+                    style="width: 80%;" placeholder="Generated IMG Tag will be displayed here">
+                <button class="btn btn-primary" onclick="copyImgTag()" style="margin-left: 10px; width: 20%;"
+                    id="copyImgTagButton"><i class="fa-solid fa-clipboard"></i></button>
+            </div>
+            <!-- Custom url when image is clicked -->
+            <details style="margin-top: 10px;" class="mt-3 customUrlDetails">
+                <summary>
+                    <h4>Custom Image redirect URL <div id="newBadge"></div></h4>
+                </summary>
+                <div id="customUrlDiv">
+                    <p class="text-muted">This is the URL that the image will redirect to when clicked (only applies to
+                        the IMG Tag)</p>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="customUrlCheckbox" checked>
+                        <label for="customUrlCheckbox">When the image is clicked, open in a new tab</label>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <input class="form-control" id="customUrlInput" style="width: 80%;" placeholder="Custom URL"
+                            type="url" />
+                        <button class="btn btn-primary" onclick="generateUrl()" style="margin-left: 10px; width: 20%;"
+                            id="customUrlButton"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </div>
+                </div>
+            </details>
+        </div>
+        <hr class="my-4" />
+        <br />
+        <!-- Decode Input URL and fill in the form -->
+        <div class="container mt-5">
+            <h1>Decode URL</h1>
+            <!-- url input -->
+            <div class="form-check" style="display: inline-block;">
+                <!-- Auto generate checkbox -->
+                <div class="form-check" style="display: inline-block; margin-left: 10px;">
+                    <input class="form-check-input" type="checkbox" value="" id="autoGenerateInput">
+                    <label class="form-check-label" for="autoGenerateInput">Auto Generate URL and IMG Tag</label>
+                </div>
+            </div>
+            <div class="form-group" style="display: flex; align-items: center;">
+                <input type="text" class="form-control" id="DecodeurlInput" placeholder="Paste URL to decode here"
+                    style="width: 80%;">
+                <button class="btn btn-primary" onclick="decodeUrl()" id="decodeButton"
+                    style="margin-left: 10px; width: 20%;"><i class="fa-solid fa-circle-right"></i></button>
+            </div>
+
+        </div>
+
+        <!-- FAQ Section -->
+        <span id="faq"></span>
+        <div class="container mt-5">
+            <h1>FAQ</h1>
+            <div class="accordion" id="faqAccordion">
+                <div class="card">
+                    <div class="card-header" id="faq1">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                What is this?
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                        data-parent="#faqAccordion">
+                        <div class="card-body">
+                            This is a tool to generate a URL that redirects to a badge image. You can use this to create
+                            badges for your projects.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="faq2">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How do I use this?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            <ol>
+                                <li>Fill in the form</li>
+                                <li>Click the generate button</li>
+                                <li>Copy the generated URL or IMG Tag</li>
+                                <li>Use the URL in your project</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="faq3">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What are the different input fields for?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            <ul>
+                                <li><b>Label:</b> The text that will be displayed at the left side of the badge</li>
+                                <li><b>Message:</b> The text that will be displayed at the right side of the badge</li>
+                                <li><b>Message Box Color:</b> The color of the message box</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="faq4">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                What can I use this for?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            <ul>
+                                <li>Badges for your projects</li>
+                                <li>Badges for your GitHub profile</li>
+                                <li>Badges for your website</li>
+                            </ul>
+                            <p>Simply generate a badge and use the generated URL or IMG Tag in your project.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="faq5">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                What are the advanved options for?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFive" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            <ul>
+                                <h4>Format & Scale</h4>
+                                <li><b>Format:</b> The format of the badge image</li>
+                                <li><b>Scale:</b> The scale of the badge image</li>
+                                <li><b>Resize Output:</b> Whether the badge image should be resized to 20px in height.
+                                    This is useful if you want to use the badge when you cannot use the IMG Tag.</li>
+                                <li><b>Image Tag will always be 20px high:</b> Whether the IMG Tag should always be 20px
+                                    high. If this is disabled, the IMG Tag will be the same height as the badge image
+                                    (wich can be resized using the scale option).</li>
+                                <li><b>Align Badge:</b> Whether the badge should be aligned with the text or other
+                                    badges. <span class="danger">Only works when using the IMG Tag.</span></li>
+                                <h4>Font Color</h4>
+                                <li><b>Auto Font Color:</b> Whether the font color should be automatically calculated
+                                    based on the background color. Could be either black or white.</li>
+                                <li><b>Font Color:</b> The font color of the badge. Only used if auto font color is
+                                    disabled.</li>
+                                <h4>Alt Text</h4>
+                                <li><b>Automatically generate alt text:</b> Just as the name says, this option
+                                    automatically generates alt text for the badge image tag based on the label and
+                                    message.</li>
+                                <li><b>Alt Text:</b> The alt text of the badge image tag. Only used if auto alt text is
+                                    disabled.</li>
+                                <h4>Other</h4>
+                                <li><b>Save everything to URL:</b> Whether ALL options (even the ones not used in the
+                                    form) should be saved to the URL. Please note that this will make the URL very long.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="faq6">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                What does the <b>beta</b> option do?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseSix" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            <p>The beta option is used to enable beta features. Here are the current beta features:
+                                (updated 2023-01-25)</p>
+                            <p class="danger">To use the beta features, you need to enable the beta option in the
+                                advanced options.</p>
+                            <ul>
+                                <li><b>Font Awesome icons</b> - You can now use Font Awesome icons in the label of the
+                                    badge. To use an icon, simply enter the fa-icon code (e.g. f09b) in the field next
+                                    to the label. <span class="danger">Please note that for now only free brand icons
+                                        are supported.</span></li>
+                                <li><b>Cache</b> - Use this option to enable caching. This will make the badge image
+                                    load faster. If disabled the default caching time of 5 seconds will be used.</li>
+                                <li><b>HTTP Image description</b> - Automatically generate a HTTP content description
+                                    for the badge image. Note: This option is being tested and cannot be disabled yet.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="faq7">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                Special thanks and credits
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseSeven" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            <ul class="heart-list">
+                                <li><a href="https://github.com/JMcrafter26" target="_blank">JMcrafter26</a> - Me, the
+                                    creator of PHP-Badges</li>
+                                <li><a href="https://dejavu-fonts.github.io" target="_blank">DejaVu Fonts</a> - The font
+                                    used for the badges</li>
+                                <li><a href="https://fontawesome.com" target="_blank">Font Awesome</a> - The icons used
+                                    for the badges (only free brand icons)</li>
+                                <li><a href="https://getbootstrap.com" target="_blank">Bootstrap</a> - The CSS framework
+                                    used for the website</li>
+                                <li><a href="https://jquery.com" target="_blank">jQuery</a> - The JavaScript library
+                                    used for the website</li>
+                                <li><a href="#">Everyone who contributed to the project</a> - Thanks to everyone who
+                                    contributed to the project!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="card">
+                    <div class="card-header" id="faq8">
+                        <h2 class="mb-0">
+                            <!-- For more info visit https://github.com/JMcrafter26/php-badges/wiki/WEB-GUI -->
+                            <p class="text-center" style="font-size: 1rem;">For more information please visit the
+                                official <a href="https://github.com/JMcrafter26/php-badges/wiki/WEB-GUI">PHP-Badges
+                                    Wiki</a></p>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12"
+                        style="margin-bottom: 20px; font-size: 0.8rem; color: #6c757d; margin-top: 40px; line-height: 0.5;">
+                        <p class="text-center"> <span id="year"></span> &copy; PHP-Badges | Version: <span
+                                id="version"></span></p>
+                        <p class="text-center">Made with <span class="heart">❤</span> by <a
+                                href="https://github.com/JMcrafter26">JMcrafter26</a></p>
+                        <p class="text-center"> <a href="https://github.com/JMcrafter26/php-badges"><i
+                                    class="fab fa-github"></i> GitHub</a> | <a
+                                href="https://test.jm26.net/badge-generator/"><i class="fas fa-external-link-alt"></i>
+                                Badge Generator</a> | <a href="https://test.jm26.net/badge-generator/#faq"><i
+                                    class="fas fa-question-circle"></i> FAQ</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Icon search modal -->
+        <div class="modal fade" id="iconModal" tabindex="-1" role="dialog" aria-labelledby="iconModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="iconModalLabel">Icon Search</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Search bar -->
+                        <input type="text" class="form-control" id="iconSearch" placeholder="Search for an icon..."
+                            style="margin-bottom: 10px">
+                        <!-- Icon list -->
+                        <div id="iconList"><span style="text-align: center; display: block;">Loading icons <i
+                                    class="fa fa-spinner fa-spin"></i></span></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Just some JS to make the page work -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.6/dist/umd/popper.min.js"
+            integrity="sha384-t8h1tf2QTJTc/F3L3t80/F+lBtTzTdvjD9RX8sO2kb0jlYfhjq3WcH80Gg0AuAa"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+        <!-- Page version -->
+        <script async>
+            var d = new Date();
+            var n = d.getFullYear();
+            document.getElementById("year").innerHTML = n;
+            document.getElementById("version").innerHTML = version;
+        </script>
+
+        <!-- New badge toggle -->
+        <script>
+            // if the new badge toggle is clicked, insert the new badge class and 'New' text into the id="newBadge" div
+            $('#showNewBadgeInput').click(function () {
+                if ($(this).is(':checked')) {
+                    // insert <span class="badge badge-pill">New</span> into every id="newBadge" div
+                    document.getElementById("newBadge").innerHTML = '<span class="badge badge-pill">New</span>';
+                    // save the state to local storage
+                    localStorage.setItem('showNewBadge', 'true');
+                } else {
+                    $('#newBadge').html('');
+                    // save the state to local storage
+                    localStorage.setItem('showNewBadge', 'false');
+                }
+            });
+
+            // when the page loads, check if the new badge toggle should be checked
+            if (localStorage.getItem('showNewBadge') === 'true') {
+                $('#showNewBadgeInput').prop('checked', true);
+                $('#newBadge').html('<span class="badge badge-pill">New</span>');
+            } 
+            if (localStorage.getItem('showNewBadge') === 'false') {
+                $('#showNewBadgeInput').prop('checked', false);
+                $('#newBadge').html('');
+            }
+            if (localStorage.getItem('showNewBadge') === null) {
+                $('#showNewBadgeInput').prop('checked', true);
+                $('#newBadge').html('<span class="badge badge-pill">New</span>');
+            }
+
+
+        </script>
+        <!-- Icon search -->
+        <script async>
+            // get icon list from https://test.jm26.net/.assets/scripts/fa-icons/iconlist.json 
+            fetch('https://api.jm26.net/badge/iconlist.json')
+                .then(response => response.json())
+                .then(data => {
+                    // get the icon list div
+                    const iconList = document.getElementById('iconList');
+                    // clear the icon list div
+                    iconList.innerHTML = '';
+                    // loop through the icons
+                    for (const [key, value] of Object.entries(data)) {
+                        // create a new div for each icon
+                        const iconDiv = document.createElement('div');
+                        // add the icon class to the div
+                        iconDiv.classList.add('icon');
+                        // add the icon class to the div
+                        iconDiv.classList.add('la-' + key);
+                        // add the value of the icon to the div
+                        iconDiv.setAttribute('data-icon', value);
+
+                        // add title to the div
+                        iconDiv.title = key;
+                        // add the icon class to the div
+                        iconDiv.innerHTML = '<i class="fa-brands fa-' + key + '"></i>';
+                        // add the icon div to the icon list div
+                        iconList.appendChild(iconDiv);
+                    }
+
+                    // when the user types in the search bar, filter the icon list
+                    $('#iconSearch').on('input', function () {
+                        // get the search term
+                        const searchTerm = $(this).val().toLowerCase();
+                        // loop through the icons
+                        $('.icon').each(function () {
+                            // get the icon class
+                            const iconClass = $(this).attr('class').split(' ')[1];
+                            // if the icon class contains the search term, show the icon
+                            if (iconClass.includes(searchTerm)) {
+                                $(this).show();
+                            } else {
+                                // otherwise, hide the icon
+                                $(this).hide();
+                            }
+                        });
+                    });
+
+
+                    //when an icon is clicked, copy its unicode (e.g. \f2b9) to the clipboard
+                    $('.icon').click(function () {
+                        // get the icon unicode
+                        const iconUnicode = $(this).attr('data-icon');
+                        // copy the icon unicode to the clipboard
+                        // navigator.clipboard.writeText(iconUnicode); //no need for this anymore
+
+                        // paste the icon unicode into the icon input
+                        $('#iconInput').val(iconUnicode);
+                        // paste the icon unicode into the icon input
+                        $('#iconInput').trigger('input');
+
+
+                        // close the modal
+                        $('#iconModal').modal('hide');
+                    });
+                });
+        </script>
+
+        <!-- Beta toggle -->
+        <script>
+            //wait until the page is loaded, check if url contains #beta and if so, enable the beta option
+            $(document).ready(function () {
+                if (window.location.href.indexOf("#beta") > -1) {
+                    console.log("Beta option enabled");
+                    // trigger the beta option change event to enable the beta options and enable the beta option
+                    document.getElementById('betaInput').checked = true;
+                    toggleBeta();
+
+                }
+            });
+
+            function toggleBeta() {
+                if (document.getElementById('betaInput').checked) {
+                    // Do something if checked
+                } else {
+                    // Undo something if not checked
+                }
+            }
+        </script>
+
+        <!-- Advanced Options Storage -->
+        <script async>
+            // reset advanced options
+            function resetAdvanced() {
+                //reset advanced options to default
+                document.getElementById('formatInput').value = 'png';
+                document.getElementById('scaleInput').value = '20';
+                document.getElementById('resizeOutput').checked = false;
+                document.getElementById('imgAlways20pxInput').checked = true;
+                document.getElementById('fontColorInput').value = '';
+                document.getElementById('autofontcolorInput').checked = true;
+                document.getElementById('alignInLineInput').checked = false;
+                document.getElementById('labelColorInput').value = '';
+                document.getElementById('altTextInput').checked = false;
+                document.getElementById('altTextCustomInput').value = '';
+                document.getElementById('cacheInput').checked = false;
+                document.getElementById('cacheTimeInput').value = '3600';
+                document.getElementById('everythingToUrlInput').checked = false;
+                document.getElementById('betaInput').checked = false;
+
+            }
+
+            // save advanced options as one json string to local storage
+            function saveAdvanced() {
+                //save advanced options to local storage
+                if (document.getElementById('formatInput').value !== '') {
+                    localStorage.setItem('format', document.getElementById('formatInput').value);
+                }
+                if (document.getElementById('scaleInput').value !== '') {
+                    localStorage.setItem('scale', document.getElementById('scaleInput').value);
+                }
+                localStorage.setItem('resizeOutput', document.getElementById('resizeOutput').checked);
+                localStorage.setItem('imgAlways20px', document.getElementById('imgAlways20pxInput').checked);
+                if (document.getElementById('fontColorInput').value !== '') {
+                    localStorage.setItem('fontColor', document.getElementById('fontColorInput').value);
+                }
+                localStorage.setItem('autofontcolor', document.getElementById('autofontcolorInput').checked);
+                localStorage.setItem('alignImlabel', document.getElementById('alignInLineInput').checked);
+                if (document.getElementById('labelColorInput').value !== '') {
+                    localStorage.setItem('labelColor', document.getElementById('labelColorInput').value);
+                }
+                localStorage.setItem('altText', document.getElementById('altTextInput').checked);
+                if (document.getElementById('altTextCustomInput').value !== '') {
+                    localStorage.setItem('altTextCustom', document.getElementById('altTextCustomInput').value);
+                }
+                localStorage.setItem('cache', document.getElementById('cacheInput').checked);
+                if (document.getElementById('cacheTimeInput').value !== '') {
+                    localStorage.setItem('cacheTime', document.getElementById('cacheTimeInput').value);
+                }
+                localStorage.setItem('everythingToUrl', document.getElementById('everythingToUrlInput').checked);
+                localStorage.setItem('beta', document.getElementById('betaInput').checked);
+            }
+
+
+            //if page is loaded and local storage is not empty, load advanced options from local storage
+            document.addEventListener('DOMContentLoaded', function () {
+                //load and apply advanced options from local storage
+                if (localStorage.getItem('format') !== null) {
+                    document.getElementById('formatInput').value = localStorage.getItem('format');
+                }
+                if (localStorage.getItem('scale') !== null) {
+                    document.getElementById('scaleInput').value = localStorage.getItem('scale');
+                }
+                if (localStorage.getItem('resizeOutput') !== null) {
+                    document.getElementById('resizeOutput').checked = localStorage.getItem('resizeOutput') === 'true';
+                }
+                if (localStorage.getItem('imgAlways20px') !== null) {
+                    document.getElementById('imgAlways20pxInput').checked = localStorage.getItem('imgAlways20px') === 'true';
+                }
+                if (localStorage.getItem('fontColor') !== null) {
+                    document.getElementById('fontColorInput').value = localStorage.getItem('fontColor');
+                }
+                if (localStorage.getItem('autofontcolor') !== null) {
+                    document.getElementById('autofontcolorInput').checked = localStorage.getItem('autofontcolor') === 'true';
+                }
+                if (localStorage.getItem('alignImlabel') !== null) {
+                    document.getElementById('alignInLineInput').checked = localStorage.getItem('alignImlabel') === 'true';
+                }
+                if (localStorage.getItem('labelColor') !== null) {
+                    document.getElementById('labelColorInput').value = localStorage.getItem('labelColor');
+                }
+                if (localStorage.getItem('altText') !== null) {
+                    document.getElementById('altTextInput').checked = localStorage.getItem('altText') === 'true';
+                }
+                if (localStorage.getItem('altTextCustom') !== null) {
+                    document.getElementById('altTextCustomInput').value = localStorage.getItem('altTextCustom');
+                }
+                if (localStorage.getItem('cache') !== null) {
+                    document.getElementById('cacheInput').checked = localStorage.getItem('cache') === 'true';
+                }
+                if (localStorage.getItem('cacheTime') !== null) {
+                    document.getElementById('cacheTimeInput').value = localStorage.getItem('cacheTime');
+                }
+                if (localStorage.getItem('everythingToUrl') !== null) {
+                    document.getElementById('everythingToUrlInput').checked = localStorage.getItem('everythingToUrl') === 'true';
+                }
+                if (localStorage.getItem('beta') !== null) {
+                    document.getElementById('betaInput').checked = localStorage.getItem('beta') === 'true';
+                }
+
+            });
+        </script>
+
+        <!-- Decode URL -->
+        <script async>
+            function decodeUrl() {
+                // clear input fields
+                document.getElementById('labelInput').value = '';
+                document.getElementById('messageInput').value = '';
+                document.getElementById('colorInput').value = '';
+
+                // Get the query string from the URL
+                const queryString = document.getElementById('DecodeurlInput').value;
+
+                // Decode the query string
+                const decodedQueryString = decodeURIComponent(queryString);
+
+                // Split the query string into an array of key-value pairs
+                const queryParams = decodedQueryString.split('&');
+
+                // Iterate over the array of key-value pairs
+                queryParams.forEach(function (param) {
+
+
+                    // Split each key-value pair into an array
+                    const paramParts = param.split('=');
+                    // Get the key and value from the array
+                    const key = paramParts[0];
+                    const value = paramParts[1];
+
+                    // Check if the key matches one of the form inputs
+                    if (key === 'label') {
+                        document.getElementById('labelInput').value = value;
+                    } else if (key === 'message') {
+                        document.getElementById('messageInput').value = value;
+                    } else if (key === 'color') {
+                        document.getElementById('colorInput').value = value;
+                        // color picker
+                        document.getElementById('colorInputPicker').value = '#' + value;
+                    } else if (key === 'format') {
+                        document.getElementById('formatInput').value = value;
+                    } else if (key === 'scale') {
+                        document.getElementById('scaleInput').value = value;
+                    } else if (key === 'fontcolor') {
+                        document.getElementById('fontColorInput').value = value;
+                        document.getElementById('autofontcolorInput').checked = false;
+                        document.getElementById('fontColorInput').disabled = false;
+                    } else if (key === 'autofontcolor') {
+                        document.getElementById('autofontcolorInput').checked = value;
+                    } else if (key === 'resizeoutput') {
+
+
+                        if (value === 'true') {
+                            document.getElementById('resizeOutputInput').checked = true;
+                        }
+
+
+                    } else if (key === 'beta') {
+                        document.getElementById('betaInput').checked = value;
+                    }
+                });
+
+                // if input is an imagetag, check for alt text
+                if (queryString.includes('<img') || queryString.includes('<IMG') || queryString.includes('<Img')) {
+                    // get alt text
+                    var altText = queryString.match(/alt="([^"]*)"/)[1];
+                    // if alt text is not empty, set alt text input to true
+                    if (altText != '') {
+                        document.getElementById('altTextInput').checked = false;
+                        document.getElementById('altTextCustomInput').value = altText;
+                        document.getElementById('altTextCustomInput').disabled = false;
+                    }
+                }
+
+
+                // Change button text to "Decoded!" for 3 seconds
+                var decodeButton = document.getElementById("decodeButton");
+                decodeButton.innerHTML = "<i class='fa-solid fa-arrows-rotate fa-spin'></i>";
+                document.getElementById('decodeButton').disabled = true;
+                setTimeout(function () {
+                    decodeButton.innerHTML = "<i class='fa-solid fa-circle-right'></i>";
+                    document.getElementById('decodeButton').disabled = false;
+                }, 3000);
+
+                // If auto-generate is checked, generate the badge
+                if (document.getElementById('autoGenerateInput').checked) {
+                    generateUrl();
+                }
+            }
+        </script>
+
+
+        <!-- Disable fields if checkbox is checked -->
+        <script async>
+            // if alt text is enabled, disable custom alt text input
+            document.getElementById('altTextInput').addEventListener('change', function () {
+                if (this.checked) {
+                    document.getElementById('altTextCustomInput').disabled = true;
+                } else {
+                    document.getElementById('altTextCustomInput').disabled = false;
+                }
+            });
+            // if autofontcolor is enabled, disable font color input
+            document.getElementById('autofontcolorInput').addEventListener('change', function () {
+                if (this.checked) {
+                    document.getElementById('fontColorInput').disabled = true;
+                } else {
+                    document.getElementById('fontColorInput').disabled = false;
+                }
+            });
+            // if resize output is enabled, disable scale input
+            document.getElementById('resizeOutputInput').addEventListener('change', function () {
+                if (this.checked) {
+                    document.getElementById('scaleInput').disabled = true;
+                } else {
+                    document.getElementById('scaleInput').disabled = false;
+                }
+            });
+
+            // if chache is enabled, enable cache time input
+            document.getElementById('cacheInput').addEventListener('change', function () {
+                if (this.checked) {
+                    // remove disabled attribute
+                    document.getElementById('cacheTimeInput').removeAttribute('hidden');
+                    document.getElementById('cacheTimeInputLabel').removeAttribute('hidden');
+                } else {
+                    // add disabled attribute
+                    document.getElementById('cacheTimeInput').setAttribute('hidden', '');
+                    document.getElementById('cacheTimeInputLabel').setAttribute('hidden', '');
+                }
+            });
+
+
+
+            // if beta is enabled, display iconInputDiv
+            document.getElementById('betaInput').addEventListener('change', function () {
+                toggleBeta();
+            });
+
+
+            // on load, disable custom alt text input and font color input if the checkbox is checked
+            window.onload = function () {
+                if (document.getElementById('altTextInput').checked) {
+                    document.getElementById('altTextCustomInput').disabled = true;
+                }
+                if (document.getElementById('autofontcolorInput').checked) {
+                    document.getElementById('fontColorInput').disabled = true;
+                }
+                if (document.getElementById('resizeOutputInput').checked) {
+                    document.getElementById('scaleInput').disabled = true;
+                }
+                document.getElementById('betaInput').checked = false;
+                document.getElementById('betaInput').disabled = false;
+            }
+        </script>
+
+        <!-- Color Picker -->
+        <script async>
+            // sync color input and color picker
+            document.getElementById('colorInput').addEventListener('change', function () {
+                //add # to value
+                var color = this.value;
+                color = '#' + color;
+                document.getElementById('colorInputPicker').value = color;
+            });
+            document.getElementById('colorInputPicker').addEventListener('change', function () {
+                //remove # from value
+                var color = this.value;
+                color = color.replace('#', '');
+                document.getElementById('colorInput').value = color;
+            });
+
+            // sync label color input and label color picker
+            document.getElementById('labelColorInput').addEventListener('change', function () {
+                //add # to value
+                var labelColor = this.value;
+                labelColor = '#' + labelColor;
+                document.getElementById('labelColorInputPicker').value = labelColor;
+            });
+            document.getElementById('labelColorInputPicker').addEventListener('change', function () {
+                //remove # from value
+                var labelColor = this.value;
+                labelColor = labelColor.replace('#', '');
+                document.getElementById('labelColorInput').value = labelColor;
+            });
+        </script>
+
+
+        <!-- Generate URL and IMG Tag -->
+        <script async>
+            function generateUrl() {
+                // get input values
+                var everything = document.getElementById('everythingToUrlInput').checked;
+                var label = document.getElementById('labelInput').value;
+                var icon = document.getElementById('iconInput').value;
+                var message = document.getElementById('messageInput').value;
+                var color = document.getElementById('colorInput').value;
+                color = color.replace('#', '');
+                var format = document.getElementById('formatInput').value;
+                var scale = document.getElementById('scaleInput').value;
+                var resizeOutput = document.getElementById('resizeOutputInput').checked;
+                var align = document.getElementById('alignInLineInput').checked;
+                var fontColor = document.getElementById('fontColorInput').value;
+                fontColor = fontColor.replace('#', '');
+                var autofontcolor = document.getElementById('autofontcolorInput').checked;
+                var labelColor = document.getElementById('labelColorInput').value;
+                labelColor = labelColor.replace('#', '');
+                var beta = document.getElementById('betaInput').checked;
+                var altText = document.getElementById('altTextInput').checked;
+                var altTextCustom = document.getElementById('altTextCustomInput').value;
+                var chache = document.getElementById('cacheInput').checked;
+                var cacheTime = document.getElementById('cacheTimeInput').value;
+                var redirectUrl = document.getElementById('customUrlInput').value;
+                var openInNewTab = document.getElementById('customUrlCheckbox').checked;
+
+                // check if redirectUrl is a valid url
+                if (redirectUrl) {
+                    if (!redirectUrl.startsWith('http://') && !redirectUrl.startsWith('https://')) {
+                        redirectUrl = '';
+                    }
+                }
+
+                // construct url
+                if (beta) {
+                    var url = 'https://api.jm26.net/badge/beta?g';
+                } else {
+                    var url = 'https://api.jm26.net/badge?g';
+                }
+                // if is everythToUrl is enabled, add everythToUrl=true add every value to url, else add only the values that are not default
+                if (everything) {
+                    url += '&label=' + encodeURIComponent(label) + '&icon=' + icon + '&message=' + encodeURIComponent(message) + '&color=' + color + '&format=' + format + '&scale=' + scale + '&resizeOutput=' + resizeOutput + '&fontColor=' + fontColor + '&autofontcolor=' + autofontcolor + '&altText=' + altText + '&altTextCustom=' + altTextCustom;
+                } else {
+                    if (label) {
+                        url += '&label=' + encodeURIComponent(label);
+                    }
+                    if (icon) {
+                        url += '&icon=' + icon;
+                    }
+                    if (message) {
+                        url += '&message=' + encodeURIComponent(message);
+                    }
+                    if (color) {
+                        url += '&color=' + color;
+                    }
+                    if (format != 'png') {
+                        url += '&format=' + format;
+                    }
+                    // if scale is not 20, add scale to url
+                    if (scale != 20) {
+                        url += '&scale=' + scale;
+                    }
+                    if (fontColor) {
+                        url += '&fontcolor=' + fontColor;
+                    }
+                    // if autofontcolor is disabled, add autofontcolor=false to url
+                    if (!autofontcolor) {
+                        url += '&autofontcolor=false';
+                    }
+                    if (labelColor) {
+                        url += '&labelcolor=' + labelColor;
+                    }
+                    if (resizeOutput) {
+                        url += '&resizeoutput=true';
+                    }
+                    if (align) {
+                        align = 'style="display: inline-block;"';
+                    } else {
+                        align = '';
+                    }
+                    if (chache) {
+                        url += '&cache=' + cacheTime;
+                    }
+                }
+                // if altText is disabled and altTextCustom is not empty, set altText to false
+                if (!altText && altTextCustom) {
+                    altText = false;
+                }
+
+
+                // display url
+                document.getElementById('urlOutput').value = url;
+
+                // if imgAlways20pxInput is checked, set width and height to 20px
+                if (document.getElementById('imgAlways20pxInput').checked) {
+                    // if auto alt text is enabled, add auto alt text, if auto alt text is disabled, add custom alt text, if custom alt text is empty and auto alt text is disabled, don't add alt text to img tag
+                    if (altText) {
+                        var altText = label + ' ' + message;
+                        var imgTag = '<img src="' + url + '" height="20px" alt="' + altText + '" ' + align + '>';
+                    } else if (altTextCustom) {
+                        var imgTag = '<img src="' + url + '" height="20px" alt="' + altTextCustom + '" ' + align + '>';
+                    } else {
+                        var imgTag = '<img src="' + url + '" height="20px" ' + align + '>';
+                    }
+                    document.getElementById('imgHeightWarn').innerHTML = '';
+                    var imgTagView = '<img src="' + url + '" height="20px" alt="Please refresh the page, if the error occurs anyway, open an issue on GitHub">';
+                } else {
+                    // if auto alt text is enabled, add auto alt text, if auto alt text is disabled, add custom alt text, if custom alt text is empty and auto alt text is disabled, don't add alt text to img tag
+                    if (altText) {
+                        var altText = label + ' ' + message;
+                        var imgTag = '<img src="' + url + '" alt="' + altText + '" ' + align + '>';
+                    } else if (altTextCustom) {
+                        var imgTag = '<img src="' + url + '" alt="' + altTextCustom + '" ' + align + '>';
+                    } else {
+                        var imgTag = '<img src="' + url + '" ' + align + '>';
+                    }
+                    document.getElementById('imgHeightWarn').innerHTML = '<p color="red">Image size in preview is 20px (because of accessibility reasons). Generated <img> Tag is not affected by this.</p><br>';
+                    var imgTagView = '<img src="' + url + '"height="20px" alt="Please refresh the page, if the error occurs anyway, open an issue on GitHub">';
+                }
+
+                if (redirectUrl) {
+                    if (openInNewTab) {
+                        var openInNewTab = ' target="_blank"';
+                    } else {
+                        var openInNewTab = '';
+                    }
+                    var imgTag = '<a href="' + redirectUrl + '"' + openInNewTab + '>' + imgTag + '</a>';
+                    var imgTagView = '<a href="' + redirectUrl + '"' + openInNewTab + '>' + imgTagView + '</a>';
+                }
+
+                // display img tag
+                document.getElementById('imgTagOutput').value = imgTag;
+                document.getElementById('imgTagView').innerHTML = imgTagView;
+
+                // Wait for image to load, if image is not found, display error message
+                var img = new Image();
+                img.onload = function () {
+                    document.getElementById('imgTagView').innerHTML = imgTagView;
+                };
+                img.onerror = function () {
+                    document.getElementById('imgTagView').innerHTML = 'Error: Image not found. Please check your input values.';
+                };
+
+                document.getElementById('generateButton').disabled = true;
+                //set text of button to "generating" for 3 seconds and make the font awesome icon spin
+                document.getElementById('generateButton').innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i> Generating...';
+                document.getElementById('customUrlButton').disabled = true;
+                document.getElementById('customUrlButton').innerHTML = '<i class="fa-solid fa-arrows-rotate fa-spin"></i>';
+
+                // check if image url returns 200 status code, if not, display error message
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onload = function () {
+                    if (xhr.status != 200) {
+                        document.getElementById('imgTagView').innerHTML = 'Error: Image not found. Please check your input values.';
+                    }
+                };
+                xhr.send();
+
+                setTimeout(function () {
+                    document.getElementById('generateButton').disabled = false;
+                    document.getElementById('generateButton').innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Generate ';
+                    document.getElementById('customUrlButton').disabled = false;
+                    document.getElementById('customUrlButton').innerHTML = '<i class="fa-solid fa-arrows-rotate"></i>';
+
+                }, 3000);
+
+            }
+        </script>
+
+        <!-- Copy to clipboard -->
+        <script async>
+            function copyUrl() {
+                // only copy if url is not empty
+                if (document.getElementById("urlOutput").value == "") {
+                    console.log("url is empty");
+                    displayToast("<i class='fas fa-exclamation-triangle'></i> Nothing to copy!");
+                    return;
+                }
+                var copyText = document.getElementById("urlOutput");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999)
+                document.execCommand("copy");
+                displayToast("<i class='fas fa-check'></i> Copied to clipboard!");
+                // change button text to "copied" for 2 seconds
+                var copyButton = document.getElementById("copyURLButton");
+                copyButton.innerHTML = "<i class='fa-solid fa-check'></i>";
+                setTimeout(function () {
+                    copyButton.innerHTML = "<i class='fa fa-solid fa-clipboard'></i>";
+                }, 2000);
+            }
+
+            function copyImgTag() {
+                //only copy if img tag is not empty
+                if (document.getElementById("imgTagOutput").value == "") {
+                    console.log("img tag is empty");
+                    displayToast("<i class='fas fa-exclamation-triangle'></i> Nothing to copy!");
+                    return;
+                }
+                var copyText = document.getElementById("imgTagOutput");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999)
+                document.execCommand("copy");
+                displayToast("<i class='fas fa-check'></i> Copied to clipboard!");
+                // change button text to "copied" for 2 seconds
+                var copyButton = document.getElementById("copyImgTagButton");
+                copyButton.innerHTML = "<i class='fa-solid fa-check'></i>";
+                setTimeout(function () {
+                    copyButton.innerHTML = "<i class='fa fa-solid fa-clipboard'></i>";
+                }, 2000);
+            }
+
+            function displayToast(toastMessage) {
+                var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+                var toastList = toastElList.map(function (toastEl) {
+                    return new bootstrap.Toast(toastEl, {
+                        "autohide": true
+                    });
+                });
+                // change toast message to "copied" for 2 seconds
+                document.getElementById("toastMessage").innerHTML = toastMessage;
+                toastList[0].show();
+
+                console.log(toastList);
+            };
+        </script>
+
+</body>
+
+</html>
