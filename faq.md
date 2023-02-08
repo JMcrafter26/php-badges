@@ -1,6 +1,6 @@
 ---
 title: FAQ
-layout: home
+layout: default
 ---
 
 # Note: This docs site is still under active development and will be ready soon. Please be patient, thank you!
