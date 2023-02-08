@@ -18,14 +18,15 @@ A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-ba
 
 </div>
 
-<a href="https://api.jm26.net/badge/statistics?accuratecount=true&resizeoutput=false" target="_blank">View statistics↗</a>
+<a href="https://api.jm26.net/badge/statistics?accuratecount=true&resizeoutput=false" target="_blank">View statistics↗</a> [About the statistics ](https://github.com/JMcrafter26/php-badges/blob/main/About%20the%20statistics.md)
 
 ## Features 🌟
 
 - Very simple 😌
 - Many [features](https://github.com/JMcrafter26/php-badges/wiki/Features-and-Usage) 🤯
-- Lightweight (minified ~4kb) 💪
+- Lightweight 💪
 - Highly customizable 🎨
+- Font Awesome icon support 🤪
 - Create Badges using a simple [Web GUI](https://test.jm26.net/Badge-generator) 📌
 - Host it yourself! (Or [use mine](https://github.com/JMcrafter26/php-badges/wiki/Get-started-(without-server)) 🌐)
 - No setup required, just upload and go 🚀
@@ -44,12 +45,6 @@ For now please just use the unicode charset (copy&paste 😉) <img src="https://
 
 
 ### Almost Finished 🙌:
-- <img src="https://api.jm26.net/badge/beta?g&label=Font%20Awesome&icon=f425&message=support!&color=618CD1&format=png&scale=20&resizeoutput=false" height="20px" alt="Font Awesome support!">
-<div style="display: inline-block;">
-  • <img src="https://api.jm26.net/badge?g&label=Better&message=Quality&color=critical&format=png&resizeoutput=true" height="20px">
-
-<img src="https://api.jm26.net/badge?g&label=I%20improved%20the&message=~QUALITY~&color=Pink&format=png&resizeoutput=false" height="20px">
-</div>
 
 - <img src="https://api.jm26.net/badge/?label=Web&message=GUI&color=blue&resizeoutput=false" height="20px" alt="Web GUI">
 
