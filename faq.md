@@ -1,9 +1,11 @@
 ---
 title: FAQ
-layout: faq
+layout: home
 ---
 
 # Note: This docs site is still under active development and will be ready soon. Please be patient, thank you!
+
+# FAQ Page
 
 This is a *bare-minimum* template to create a Jekyll site that uses the [Just the Docs] theme. You can easily set the created site to be published on [GitHub Pages] – the [README] file explains how to do that, along with other details.
 
