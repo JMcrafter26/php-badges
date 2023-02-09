@@ -1,6 +1,6 @@
 # About the statistics
 
-The statistics are open-source and available and **never collect/store any informations beside the use count of the script**.
+The statistics are open-source and available for everyone and **never collect/store any informations beside the use count of the script**.
 
 That means we **do not** know who is using the script and what they are doing with it. We do not collect any personal informations and we *never* will.
 
