@@ -31,3 +31,6 @@ The short answer is: *nothing*.
 **SO** if you are a hacker and you are using the script, please stop. This makes us very sad ☹️
 
 Please do not use the script in a loop or in a way that is designed to spam the API and increase the use count. - This will not result a ban (because we do not know who is using the script) but *it will make us very sad and we will not like you anymore* 😢
+
+***
+<img src="https://test.jm26.net/api/php-badges-views" height="20px" >
