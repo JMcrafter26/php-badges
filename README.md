@@ -12,3 +12,6 @@ A 🔧 simple PHP Badge generator, like [shields.io](https://shields.io) 🔥 to
 **[Web Generator 🔗](https://jmcrafter26.github.io/php-badges/generate)**
 
 The site allows you to generate a Badge very easy and with a <img src="https://api.jm26.net/badge?g&label=simple&message=GUI&color=blue" height="20px" alt="simple GUI" style="display: inline-block; vertical-align: middle;">.
+
+***
+<img src="https://test.jm26.net/api/php-badges-views" height="20px" >
