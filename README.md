@@ -1,7 +1,7 @@
 # PHP-Badges
 
-<img alt="Banner" src="https://github.com/JMcrafter26/php-badges/raw/main/.github/banner.jpg">
-A 🔧 simple PHP Badge generator, like [shields.io](https://shields.io) 🔥 to generate cool <img src="https://api.jm26.net/badge?g&label=little&message=Badges" height="20px" alt="little Badges" style="display: inline-block;"> 🌟 for your projects.
+![Banner](https://github.com/JMcrafter26/php-badges/raw/main/.github/banner.jpg)
+A 🔧 simple PHP Badge generator, like [shields.io](https://shields.io) 🔥 to generate cool <img src="https://api.jm26.net/badge?g&label=little&message=Badges" height="20px" alt="little Badges" style="display: inline-block;">🌟 for your projects.
 
 ## Documentation
 
