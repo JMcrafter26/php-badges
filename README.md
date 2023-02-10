@@ -10,7 +10,7 @@ A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-ba
 <img src="https://api.jm26.net/badge/?g&label=PHP&message=Badges&format=png&resizeoutput=false" height="20px">
 <img src="https://api.jm26.net/badge/?g&label=Own&message=Badges&color=C60B8A&format=png&resizeoutput=false" height="20px">
 <img src="https://api.jm26.net/badge/?format=jpg&label=Supports&message=multiple%20formats&color=orange&resizeoutput=false" height="20px" alt="Supports multiple formats">
-<img src="https://api.jm26.net/badge/?label=More%20cool%20features&message=on%20the%20way!&color=violet&resizeoutput=false" height="20px" alt="More Features on the way">
+<img src="https://api.jm26.net/badge/?label=More%20cool%20features&message=on%20their%20way!&color=violet&resizeoutput=false" height="20px" alt="More Features on the way">
 <img src="https://api.jm26.net/badge/?label=No%20input&message=LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!&color=brightgreen&resizeoutput=false&scale=35" height="20px" alt="No input limit">
 <img src="https://api.jm26.net/badge/?label=HEX%20color&message=support&color=0596a3&resizeoutput=false" height="20px" alt="HEX color support">
 <img src="https://api.jm26.net/badge/statistics?resizeoutput=false" height="20px" alt="Statistics">
