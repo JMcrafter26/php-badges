@@ -1,23 +1,8 @@
 ---
 title: Home
-layout: home
+layout: default
 ---
 
-<!-- PHP-Badges Documentation introduction
-Features 🌟
-
-    Very simple 😌
-    Many features 🤯
-    Lightweight 💪
-    Highly customizable 🎨
-    Font Awesome icon support Font Awesome
-    Create Badges using a simple Web GUI 📌
-    Host it yourself! (Or use mine 🌐)
-    No setup required, just upload and go 🚀
-    More coming soon! 🔜
-    All Feature and Usage Instructions listed here 📑
-
--->
 # PHP-Badges
 
 <img src="https://raw.githubusercontent.com/JMcrafter26/php-badges/main/.github/banner.jpg" alt="PHP-Badges Banner" style="width: 100%;">
