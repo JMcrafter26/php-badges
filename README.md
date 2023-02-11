@@ -55,4 +55,4 @@ The site allows you to generate a Badge very easy and with a simple GUI.🧩
 
 <br/>
 
-<img src="https://test.jm26.net/api/php-badges-views" height="20px" style="display: inline-block;"> <img src="https://api.jm26.net/badge/beta?url=https://raw.githubusercontent.com/JMcrafter26/status/master/api/badge-api/uptime.json&label=Badge%20API%20Uptime" height="20px" style="display: inline-block;"> <img src="https://api.jm26.net/badge/beta?url=https://raw.githubusercontent.com/JMcrafter26/status/master/api/badge-api/response-time.json&format=capf-l" height="20px" style="display: inline-block;">
+<img src="https://test.jm26.net/api/php-badges-views" height="20px" style="display: inline-block;"> <img src="https://api.jm26.net/badge/beta?url=https://raw.githubusercontent.com/JMcrafter26/status/master/api/badge-api/uptime.json&label=Badge%20API%20Uptime" height="20px" style="display: inline-block;">
