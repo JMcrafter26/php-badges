@@ -45,7 +45,7 @@ The site allows you to generate a Badge very easy and with a simple GUI.🧩
 
 ### Almost Finished 🙌:
 
-- 
+- URL and Json input 
 
 ## Thanks to
 - Me [(JMcrafter26)](https://test.jm26.net/list) for the code 😁
