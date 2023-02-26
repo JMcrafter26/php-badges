@@ -38,6 +38,10 @@ A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-ba
 ## [Badge Generator ↗](https://jmcrafter26.github.io/php-badges/generate)
 The site allows you to generate a Badge very easy and with a simple GUI.🧩
 
+## Notice
+
+**PLEASE NOTE: I am a student and I'll have my exams soon, so I propably won't have time for this.*** -But after the exams (~June) I will continue working on this, I promise ^^
+
 ## Working on 👨‍💻
 
 - <img src="https://api.jm26.net/badge/?label=JSON&message=input&color=yellow&resizeoutput=false" height="20px" alt="JSON input">
@@ -52,6 +56,7 @@ The site allows you to generate a Badge very easy and with a simple GUI.🧩
 - [DejaVu Fonts](https://dejavu-fonts.github.io/) for the nice font
 - [icons8](https://icons8.com) for the super cool icons
 - [Font Awesome](https://fontawesome.com) for the icons on the badges
+- [Shields.io](https://shields.io) for the json api (Hint: New release soon!)
 
 <br/>
 
