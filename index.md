@@ -68,7 +68,8 @@ To generate a badge with different settings, simply add the following query para
 
 #### Examples
 
-- <img src="https://api.jm26.net/badge?g&label=Label&message=Message&color=blue" height="20px" alt="Label Message" style="display: inline-block; vertical-align: middle;"> `https://api.jm26.net/badge?g&label=Label&message=Message&color=blue`
+- ![Label Message](https://api.jm26.net/badge?g&label=Label&message=Message&color=blue){height="20px"}
+ `https://api.jm26.net/badge?g&label=Label&message=Message&color=blue`
 - <img src="https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b" height="20px" alt="Label Message" style="display: inline-block; vertical-align: middle;"> `https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b`
 - **BETA FEATURE!** <img src="https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars&scale=5" height="20px" alt="Label Message" style="display: inline-block; vertical-align: middle;"> `https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars` (See [External JSON](/features#external-json) for more info)
 
