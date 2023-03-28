@@ -70,7 +70,7 @@ To generate a badge with different settings, simply add the following query para
 
 - <img src="https://api.jm26.net/badge?g&label=Label&message=Message&color=blue" height="20px" alt="Label Message" style="display: inline-block; vertical-align: middle;"> `https://api.jm26.net/badge?g&label=Label&message=Message&color=blue`
 - <img src="https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b" height="20px" alt="Label Message" style="display: inline-block; vertical-align: middle;"> `https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b`
-- **BETA FEATURE!** <img src="https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars" height="20px" alt="Label Message" style="display: inline-block; vertical-align: middle;"> `https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars` (See [External JSON](/features#external-json) for more info)
+- **BETA FEATURE!** <img src="https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars&scale=5" height="20px" alt="Label Message" style="display: inline-block; vertical-align: middle;"> `https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars` (See [External JSON](/features#external-json) for more info)
 
 ***
 <p style="text-align: center;">Made with ❤️ by <a href="https://jm26.net">JMcrafter26</a></p>
@@ -81,6 +81,7 @@ Enjoying PHP-BADGES? Show some love by liking and sharing this repository or sup
 </a>
 
 ----
+
 
 [GitHub]: https://github.com/jmcrafter26/php-badges
 [Releases]: https://github.com/jmcrafter26/php-badges/release/latest
