@@ -85,6 +85,5 @@ Enjoying PHP-BADGES? Show some love by liking and sharing this repository or sup
 
 ----
 
-
 [GitHub]: https://github.com/jmcrafter26/php-badges
 [Releases]: https://github.com/jmcrafter26/php-badges/release/latest
