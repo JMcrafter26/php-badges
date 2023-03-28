@@ -7,6 +7,3 @@ url: https://jmcrafter26.github.io/php-badges
 aux_links:
   Github: https://github.com/JMcrafter26/php-badges
   Download PHP-Badges: https://github.com/JMcrafter26/php-badges/releases/latest
-
-plugins:
-  - jekyll-image-size
