@@ -15,7 +15,7 @@ A lightweight, highly customizable, and easy to use PHP Badge Generator, like sh
 - Many features 🤯
 - Lightweight 💪
 - Highly customizable 🎨
-- Font Awesome icon support Font Awesome <img height="20" src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/brands/font-awesome.svg?sanitize=true" alt="Font Awesome" style="vertical-align: middle;">
+- Font Awesome icon support Font Awesome 🌀
 - Create Badges using a simple Web GUI 📌
 - Host it yourself! (Or use mine 🌐)
 - No setup required, just upload and go 🚀
