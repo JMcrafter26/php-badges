@@ -78,10 +78,7 @@ To generate a badge with different settings, simply add the following query para
 ***
 <p style="text-align: center;">Made with ❤️ by <a href="https://jm26.net">JMcrafter26</a></p>
 <p style="text-align: center; color: #aaa; font-size: 0.8em;">
-Enjoying PHP-BADGES? Show some love by liking and sharing this repository or support me by <a href="https://www.buymeacoffee.com/JM26.NET" target="_blank">buying me a coffee ☕</a>!
-
-<a href="https://github.com/JMcrafter26/php-badges" target="_blank" style="text-decoration: none; text-align: center;">
-</a>
+Enjoying PHP-BADGES? Show some love by liking and sharing this repository or support me by <a href="https://www.buymeacoffee.com/JM26.NET" target="_blank">buying me a coffee ☕</a>
 
 ----
 
