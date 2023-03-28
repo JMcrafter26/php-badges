@@ -78,17 +78,9 @@ To generate a badge with different settings, simply add the following query para
 Enjoying PHP-BADGES? Show some love by liking and sharing this repository or support me by <a href="https://www.buymeacoffee.com/JM26.NET" target="_blank">buying me a coffee ☕</a>!
 
 <a href="https://github.com/JMcrafter26/php-badges" target="_blank" style="text-decoration: none; text-align: center;">
-<img src="https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars" height="20px" alt="Label Message" style="display: inline-block;">
-<img src="https://test.jm26.net/api/php-badges-views" height="20px" alt="PHP-Badges Views" style="display: inline-block;">
 </a>
 
 ----
 
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
-
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub]: https://github.com/jmcrafter26
-[README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
-[Jekyll]: https://jekyllrb.com
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
+[GitHub]: https://github.com/jmcrafter26/php-badges
+[Releases]: https://github.com/jmcrafter26/php-badges/release/latest
