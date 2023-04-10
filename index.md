@@ -24,7 +24,7 @@ A lightweight, highly customizable, and easy to use PHP Badge Generator, like sh
   
 ## Installation 📥
 
-For more detailed instructions, see the [Get Started](/get-started) page.
+For more detailed instructions, see the [Get Started](/get-started.html) page.
 
 ### Requirements
 
@@ -39,7 +39,7 @@ For more detailed instructions, see the [Get Started](/get-started) page.
 
 ## Usage 📖
 
-For more detailed instructions, see the [Features and Usage](/features) page.
+For more detailed instructions, see the [Features and Usage](/features.html) page.
 
 ### Basic Usage
 
