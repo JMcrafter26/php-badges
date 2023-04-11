@@ -28,7 +28,7 @@ For more detailed instructions, see the [Get Started](/get-started.html) page.
 
 ### Requirements
 
-- PHP 7.2 or higher
+- PHP 5.4.0 or higher
 - PHP GD extension installed (most PHP installations have this by default)
 
 ### Installation Steps
