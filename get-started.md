@@ -10,7 +10,7 @@ We will guide you through the simple Installation process (not shire if this can
 
 ## Requirements
 
-- PHP 7.2 or higher
+- PHP 5.4 or higher
 - The GD extension installed (most PHP installations have this by default)
 - (Optional: A cup of coffee ☕️)
 
