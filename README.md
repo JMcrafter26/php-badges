@@ -38,6 +38,10 @@ A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-ba
 ## [Badge Generator ↗](https://jmcrafter26.github.io/php-badges/generate)
 The site allows you to generate a Badge very easy and with a simple GUI.🧩
 
+## Installation
+
+Here is the (yet unfinished) documentation: **[Documentation](https://jmcrafter26.github.io/php-badges/)**
+
 ## Notice
 
 **PLEASE NOTE: I am a student and I'll have my exams soon, so I propably won't have time for this.*** -But after the exams (~June) I will continue working on this, I promise ^^
