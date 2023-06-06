@@ -20,11 +20,11 @@ A lightweight, highly customizable, and easy to use PHP Badge Generator, like sh
 - Host it yourself! (Or use mine 🌐)
 - No setup required, just upload and go 🚀
 - More coming soon! 🔜
-- All Feature and Usage Instructions listed [here](/features) 📑
+- All Feature and Usage Instructions listed [here](./features) 📑
   
 ## Installation 📥
 
-For more detailed instructions, see the [Get Started](/get-started.html) page.
+For more detailed instructions, see the [Get Started](./get-started.html) page.
 
 ### Requirements
 
@@ -39,7 +39,7 @@ For more detailed instructions, see the [Get Started](/get-started.html) page.
 
 ## Usage 📖
 
-For more detailed instructions, see the [Features and Usage](/features.html) page.
+For more detailed instructions, see the [Features and Usage](./features.html) page.
 
 ### Basic Usage
 
@@ -54,17 +54,17 @@ By default, the badge will be created with the following settings:
 - Message: go.jm26.net/badge-docs
 - Color: green
 
-(Instructions for changing the default settings can be found [here](/features#default-settings))
+(Instructions for changing the default settings can be found [here](./features#default-settings))
 
 #### Creating a Badge
 
 To generate a badge with different settings, simply add the following query parameters to the URL:
 
-- `icon` - The icon to use, Font Awesome icon unicode (e.g. `f09b` for GitHub). See [Icons](/features#icons) for more info.
+- `icon` - The icon to use, Font Awesome icon unicode (e.g. `f09b` for GitHub). See [Icons](./features#icons) for more info.
 - `label` - The label text (left side) of the badge
 - `message` - The message text (right side) of the badge
 - `color` - The color of the badge (e.g. `green`, `red`, ok, important, ff69b4, etc.)
-- (optional) `url` - The URL to an external json file to get the badge settings from (see [External JSON](/features#external-json) for more info)
+- (optional) `url` - The URL to an external json file to get the badge settings from (see [External JSON](./features#external-json) for more info)
 
 #### Examples
 
@@ -73,7 +73,7 @@ To generate a badge with different settings, simply add the following query para
 - ![Label Message](https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b){: height="20" } 
 `https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b`
 - **BETA FEATURE!** ![Stars](https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars){:height="20"} 
-`https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars` (See [External JSON](/features#external-json) for more info)
+`https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars` (See [External JSON](./features#external-json) for more info)
 
 ***
 <p style="text-align: center;">Made with ❤️ by <a href="https://jm26.net">JMcrafter26</a></p>
