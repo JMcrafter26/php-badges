@@ -44,7 +44,9 @@ Here is the (yet unfinished) documentation: **[Documentation](https://jmcrafter2
 
 ## Notice
 
-**PLEASE NOTE: I am a student and I'll have my exams soon, so I propably won't have time for this.*** -But after the exams (~June) I will continue working on this, I promise ^^
+~**PLEASE NOTE: I am a student and I'll have my exams soon, so I propably won't have time for this.*** -But after the exams (June) I will continue working on this, I promise ^^~
+
+**EDIT:** My finals are over and now I have time again :)
 
 ## Working on 👨‍💻
 
