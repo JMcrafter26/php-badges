@@ -349,7 +349,7 @@ E.g. `https://api.jm26.net/badge/beta?status=password` - The result will be a JS
     "icons path": "./font-awesome.woff"
   }
 }
-<code>
+</code>
 </details>
 
 #### Status Viewer
