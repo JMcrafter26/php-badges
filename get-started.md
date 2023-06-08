@@ -14,7 +14,7 @@ We will guide you through the simple Installation process (not shire if this can
 - The GD extension installed (most PHP installations have this by default)
 - (Optional: A cup of coffee ☕️)
 
-**Alternatively** please refer to the [Get Started without a server](get-started-without-a-server)
+**Alternatively** you could use my [publicly hosted version](https://api.jm26.net/badge) of PHP-BADGES, but I would recommend hosting it yourself, as it is very simple to do so.
 
 ## Installation Steps
 
@@ -38,17 +38,19 @@ By default, the badge will be created with the following settings:
 - Message: go.jm26.net/badge-docs
 - Color: green
 
-(Instructions for changing the default settings can be found [here](./features#default-settings))
+(Instructions for changing the default settings can be found [here](./usage.html#default-settings))
 
 #### Creating a Badge
 
-To generate a badge with different settings, simply add the following query parameters to the URL:
+I recommend using the [Badge Generator](https://test.jm26.net/badge-generator/) to create your badges, as it is much easier to use.
 
-- `icon` - The icon to use, Font Awesome icon unicode (e.g. `f09b` for GitHub). See [Icons](./features#icons) for more info.
+**Otherwise** to generate a badge with different settings, simply add the following query parameters to the URL:
+
+- `icon` - The icon to use, Font Awesome icon unicode (e.g. `f09b` for GitHub). See [Icons](./usage.html#icons) for more info.
 - `label` - The label text (left side) of the badge
 - `message` - The message text (right side) of the badge
 - `color` - The color of the badge (e.g. `green`, `red`, ok, important, ff69b4, etc.)
-- (optional) `url` - The URL to an external json file to get the badge settings from (see [External JSON](./features#external-json) for more info)
+- (optional) `url` - The URL to an external json file to get the badge settings from (see [External JSON](./usage.html#url) for more info)
 
 #### Examples (quality was reduced due to the image being resized)
 
