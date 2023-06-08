@@ -16,7 +16,61 @@ We will guide you through the simple Installation process (not shire if this can
 
 **Alternatively** please refer to the [Get Started without a server](get-started-without-a-server)
 
-## Installation
+## Installation Steps
+
+1. Download the latest release from the [Releases](https://github.com/JMcrafter26/php-badges/releases/latest) page.
+2. Extract the zip file and upload the `generate.php` from the `src` folder to your web server.
+3. You're done! 🎉
+
+## Whats next?
+
+
+### Basic Usage
+
+#### First Visit
+
+When you first visit the `generate.php` file in your browser, the font will be automatically downloaded for you.
+
+To create a badge, simply add open the `generate.php` file in your browser.
+By default, the badge will be created with the following settings:
+- Icon: GitHub 
+- Label: Documentation
+- Message: go.jm26.net/badge-docs
+- Color: green
+
+(Instructions for changing the default settings can be found [here](./features#default-settings))
+
+#### Creating a Badge
+
+To generate a badge with different settings, simply add the following query parameters to the URL:
+
+- `icon` - The icon to use, Font Awesome icon unicode (e.g. `f09b` for GitHub). See [Icons](./features#icons) for more info.
+- `label` - The label text (left side) of the badge
+- `message` - The message text (right side) of the badge
+- `color` - The color of the badge (e.g. `green`, `red`, ok, important, ff69b4, etc.)
+- (optional) `url` - The URL to an external json file to get the badge settings from (see [External JSON](./features#external-json) for more info)
+
+#### Examples
+
+- Standard Badge
+
+    ![Label Message](https://api.jm26.net/badge?g&label=Label&message=Message&color=blue&scale=2)
+
+    `https://api.jm26.net/badge?g&label=Label&message=Message&color=blue`
+- Badge with Icon
+
+    ![Label Message](https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b&scale=2)
+
+    `https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b`
+- **BETA FEATURE!** 
+
+    ![Stars](https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars&scale=2) 
+
+    `https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars` (See [External JSON](./features#external-json) for more info)
+
+    ### More Examples
+
+    For more examples, please refer to the [Usage](./usage) page.
 
 ***
 <p style="text-align: center;">Made with ❤️ by <a href="https://jm26.net">JMcrafter26</a></p>
