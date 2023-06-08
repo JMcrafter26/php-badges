@@ -15,25 +15,46 @@ After you have installed PHP-Badges, you can start using it.
 <details>
 <summary>Click to expand</summary>
 
-- [Usage](#usage)
-  - [List of contents](#list-of-contents)
-  - [Simple usage](#simple-usage)
-    - [Label](#label)
-    - [Message](#message)
-    - [Color](#color)
-      - [Color Codes](#color-codes)
-    - [Icon](#icon)
-      - [Icon Codes](#icon-codes)
-  - [Advanced Usage](#advanced-usage)
-    - [Image Format](#image-format)
-    - [Image Scale](#image-scale)
-    - [Label Color](#label-color)
-    - [Font Color](#font-color)
-      - [Auto Font Color](#auto-font-color)
-    - [Cache Lifetime](#cache-lifetime)
-    - [Status of PHP-Badges](#status-of-php-badges)
-      - [Status Viewer](#status-viewer)
-  - [Conclusion](#conclusion)
+<ul>
+  <li><a href="#usage">Usage</a></li>
+  <li><a href="#list-of-contents">List of contents</a></li>
+  <li><a href="#simple-usage">Simple usage</a>
+    <ul>
+      <li><a href="#label">Label</a></li>
+      <li><a href="#message">Message</a></li>
+      <li><a href="#color">Color</a>
+        <ul>
+          <li><a href="#color-codes">Color Codes</a></li>
+        </ul>
+      </li>
+      <li><a href="#icon">Icon</a>
+        <ul>
+          <li><a href="#icon-codes">Icon Codes</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#advanced-usage">Advanced Usage</a>
+    <ul>
+      <li><a href="#image-format">Image Format</a></li>
+      <li><a href="#image-scale">Image Scale</a></li>
+      <li><a href="#label-color">Label Color</a></li>
+      <li><a href="#font-color">Font Color</a>
+        <ul>
+          <li><a href="#auto-font-color">Auto Font Color</a></li>
+        </ul>
+      </li>
+      <li><a href="#cache-lifetime">Cache Lifetime</a></li>
+      <li><a href="#status-of-php-badges">Status of PHP-Badges</a>
+        <ul>
+          <li><a href="#status-viewer">Status Viewer</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
+
 
 </details>
 
