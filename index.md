@@ -26,54 +26,30 @@ A lightweight, highly customizable, and easy to use PHP Badge Generator, like sh
 
 For more detailed instructions, see the [Get Started](./get-started.html) page.
 
-### Requirements
-
-- PHP 5.4.0 or higher
-- PHP GD extension installed (most PHP installations have this by default)
-
-### Installation Steps
-
-1. Download the latest release from the [Releases](https://github.com/JMcrafter26/php-badges/releases/latest) page.
-2. Extract the zip file and upload the `generate.php` from the `src` folder to your web server.
-3. You're done! 🎉
-
 ## Usage 📖
 
-For more detailed instructions, see the [Features and Usage](./features.html) page.
-
-### Basic Usage
-
-#### First Visit
-
-When you first visit the `generate.php` file in your browser, the font will be automatically downloaded and cached for you.
-
-To create a badge, simply add open the `generate.php` file in your browser.
-By default, the badge will be created with the following settings:
-- Icon: GitHub 
-- Label: Documentation
-- Message: go.jm26.net/badge-docs
-- Color: green
-
-(Instructions for changing the default settings can be found [here](./features#default-settings))
-
-#### Creating a Badge
-
-To generate a badge with different settings, simply add the following query parameters to the URL:
-
-- `icon` - The icon to use, Font Awesome icon unicode (e.g. `f09b` for GitHub). See [Icons](./features#icons) for more info.
-- `label` - The label text (left side) of the badge
-- `message` - The message text (right side) of the badge
-- `color` - The color of the badge (e.g. `green`, `red`, ok, important, ff69b4, etc.)
-- (optional) `url` - The URL to an external json file to get the badge settings from (see [External JSON](./features#external-json) for more info)
+For more detailed instructions, see the [Usage](./usage.html) page.
 
 #### Examples
 
-- ![Label Message](https://api.jm26.net/badge?g&label=Label&message=Message&color=blue){: height="20" }
-`https://api.jm26.net/badge?g&label=Label&message=Message&color=blue`
-- ![Label Message](https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b){: height="20" } 
-`https://api.jm26.net/badge?g&label=Label&message=Message&color=important&icon=f09b`
-- **BETA FEATURE!** ![Stars](https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars){:height="20"} 
-`https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars` (See [External JSON](./features#external-json) for more info)
+<div style="display: inline-block;">
+<img src="https://api.jm26.net/badge/?g&label=PHP&message=Badges&format=png&resizeoutput=false" height="20px">
+<img src="https://api.jm26.net/badge/?g&label=Own&message=Badges&color=C60B8A&format=png&resizeoutput=false" height="20px">
+<img src="https://api.jm26.net/badge/?format=jpg&label=Supports&message=multiple%20formats&color=orange&resizeoutput=false" height="20px" alt="Supports multiple formats">
+<img src="https://api.jm26.net/badge/?label=More%20cool%20features&message=on%20their%20way!&color=violet&resizeoutput=false" height="20px" alt="More Features on the way">
+<img src="https://api.jm26.net/badge/?label=No%20input&message=LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!LIMIT!&color=brightgreen&resizeoutput=false&scale=35" height="20px" alt="No input limit">
+<img src="https://api.jm26.net/badge/beta?url=https://shields.io/github/stars/jmcrafter26/php-badges.json&color=FFDB2D&label=Stars" height="20px">
+<img src="https://api.jm26.net/badge/?label=HEX%20color&message=support&color=0596a3&resizeoutput=false" height="20px" alt="HEX color support">
+<img src="https://api.jm26.net/badge/statistics?resizeoutput=false" height="20px" alt="Statistics">
+<img src="https://api.jm26.net/badge/beta?g&icon=f09b&format=png&scale=20&resizeoutput=false" height="20px" alt=" ">
+  </div>
+
+## Thanks to
+- Me [(JMcrafter26)](https://test.jm26.net/list) for the code 😁
+- [DejaVu Fonts](https://dejavu-fonts.github.io/) for the nice font
+- [icons8](https://icons8.com) for the super cool icons
+- [Font Awesome](https://fontawesome.com) for the icons on the badges
+- [Shields.io](https://shields.io) for the json api (Hint: New release soon!)
 
 ***
 <p style="text-align: center;">Made with ❤️ by <a href="https://jm26.net">JMcrafter26</a></p>
