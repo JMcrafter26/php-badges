@@ -78,8 +78,6 @@ I recommend using the [Badge Generator](https://test.jm26.net/badge-generator/) 
 <p style="text-align: center;">Made with ❤️ by <a href="https://jm26.net">JMcrafter26</a></p>
 <p style="text-align: center; color: #aaa; font-size: 0.8em;">
 Enjoying PHP-BADGES? Show some love by liking and sharing this repository or support me by <a href="https://www.buymeacoffee.com/JM26.NET" target="_blank">buying me a coffee ☕</a>
-
-***
-
-[GitHub](https://github.com/jmcrafter26/php-badges)
-[Releases](https://github.com/jmcrafter26/php-badges/release/latest)
+</p>
+<a href="https://github.com/jmcrafter26/php-badges" target="_blank"><img src="https://api.jm26.net/badge?g&label=Github&icon=f09b&message=Repository&color=007EC6" height="20px" alt="Github Repository" ></a>
+<a href="https://github.com/jmcrafter26/php-badges/release/latest" target="_blank"><img src="https://api.jm26.net/badge?g&label=Github&icon=f09b&message=Releases&color=238636" height="20px" alt="Github Releases" ></a>
