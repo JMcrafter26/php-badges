@@ -99,29 +99,123 @@ PHP-Badges supports HEX color codes and some color names:
 
 **Some colors are only available in newer versions of PHP-Badges.**
 
-| Color Name | HEX Code | Preview |
-| ---------- | -------- | ------- |
-| red        | #e05d44  | ![red](https://api.jm26.net/badge?label=&message=red&color=red&scale=1) |
-| orange     | #fe7d37  | ![orange](https://api.jm26.net/badge?label=&message=orange&color=orange&scale=1) |
-| yellow     | #dfb317  | ![yellow](https://api.jm26.net/badge?label=&message=yellow&color=yellow&scale=1) |
-| green      | #97CA00  | ![green](https://api.jm26.net/badge?label=&message=green&color=green&scale=1) |
-| brighgreen | #44cc11  | ![brighgreen](https://api.jm26.net/badge?label=&message=brighgreen&color=brighgreen&scale=1) |
-| cyan       | #00eaff  | ![cyan](https://api.jm26.net/badge?label=&message=cyan&color=cyan&scale=1) |
-| blue       | #007ec6  | ![blue](https://api.jm26.net/badge?label=&message=blue&color=blue&scale=1) |
-| violet     | #7b16ff  | ![violet](https://api.jm26.net/badge?label=&message=violet&color=violet&scale=1) |
-| pink       | #ff69b4  | ![pink](https://api.jm26.net/badge?label=&message=pink&color=pink&scale=1) |
-| grey       | #555555  | ![grey](https://api.jm26.net/badge?label=&message=grey&color=grey&scale=1) |
-| silver     | #9f9f9f  | ![silver](https://api.jm26.net/badge?label=&message=silver&color=silver&scale=1) |
-| lightgrey  | #9f9f9f  | ![lightgrey](https://api.jm26.net/badge?label=&message=lightgrey&color=lightgrey&scale=1) |
-| black      | #000000  | ![black](https://api.jm26.net/badge?label=&message=black&color=black&scale=1) |
-| white      | #ffffff  | ![white](https://api.jm26.net/badge?label=&message=white&color=white&scale=1) |
-| critical   | #e05d44  | ![critical](https://api.jm26.net/badge?label=&message=critical&color=critical&scale=1) |
-| important  | #fe7d37  | ![important](https://api.jm26.net/badge?label=&message=important&color=important&scale=1) |
-| highlight  | #dbe300  | ![highlight](https://api.jm26.net/badge?label=&message=highlight&color=highlight&scale=1) |
-| ok         | #97CA00  | ![ok](https://api.jm26.net/badge?label=&message=ok&color=ok&scale=1) |
-| success    | #44cc11  | ![success](https://api.jm26.net/badge?label=&message=success&color=success&scale=1) |
-| informational | #007ec6 | ![informational](https://api.jm26.net/badge?label=&message=informational&color=informational&scale=1) |
-| inactive   | #9f9f9f  | ![inactive](https://api.jm26.net/badge?label=&message=inactive&color=inactive&scale=1) |
+<table>
+  <thead>
+    <tr>
+      <th>Color Name</th>
+      <th>HEX Code</th>
+      <th>Preview</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>red</td>
+      <td>#e05d44</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=red&amp;color=red&amp;scale=1" alt="red"></td>
+    </tr>
+    <tr>
+      <td>orange</td>
+      <td>#fe7d37</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=orange&amp;color=orange&amp;scale=1" alt="orange"></td>
+    </tr>
+    <tr>
+      <td>yellow</td>
+      <td>#dfb317</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=yellow&amp;color=yellow&amp;scale=1" alt="yellow"></td>
+    </tr>
+    <tr>
+      <td>green</td>
+      <td>#97CA00</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=green&amp;color=green&amp;scale=1" alt="green"></td>
+    </tr>
+    <tr>
+      <td>brighgreen</td>
+      <td>#44cc11</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=brighgreen&amp;color=brighgreen&amp;scale=1" alt="brighgreen"></td>
+    </tr>
+    <tr>
+      <td>cyan</td>
+      <td>#00eaff</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=cyan&amp;color=cyan&amp;scale=1" alt="cyan"></td>
+    </tr>
+    <tr>
+      <td>blue</td>
+      <td>#007ec6</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=blue&amp;color=blue&amp;scale=1" alt="blue"></td>
+    </tr>
+    <tr>
+      <td>violet</td>
+      <td>#7b16ff</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=violet&amp;color=violet&amp;scale=1" alt="violet"></td>
+    </tr>
+    <tr>
+      <td>pink</td>
+      <td>#ff69b4</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=pink&amp;color=pink&amp;scale=1" alt="pink"></td>
+    </tr>
+    <tr>
+      <td>grey</td>
+      <td>#555555</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=grey&amp;color=grey&amp;scale=1" alt="grey"></td>
+    </tr>
+    <tr>
+      <td>silver</td>
+      <td>#9f9f9f</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=silver&amp;color=silver&amp;scale=1" alt="silver"></td>
+    </tr>
+    <tr>
+      <td>lightgrey</td>
+      <td>#9f9f9f</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=lightgrey&amp;color=lightgrey&amp;scale=1" alt="lightgrey"></td>
+    </tr>
+    <tr>
+      <td>black</td>
+      <td>#000000</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=black&amp;color=black&amp;scale=1" alt="black"></td>
+    </tr>
+    <tr>
+      <td>white</td>
+      <td>#ffffff</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=white&amp;color=white&amp;scale=1" alt="white"></td>
+    </tr>
+    <tr>
+      <td>critical</td>
+      <td>#e05d44</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=critical&amp;color=critical&amp;scale=1" alt="critical"></td>
+    </tr>
+    <tr>
+      <td>important</td>
+      <td>#fe7d37</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=important&amp;color=important&amp;scale=1" alt="important"></td>
+    </tr>
+    <tr>
+      <td>highlight</td>
+      <td>#dbe300</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=highlight&amp;color=highlight&amp;scale=1" alt="highlight"></td>
+    </tr>
+    <tr>
+      <td>ok</td>
+      <td>#97CA00</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=ok&amp;color=ok&amp;scale=1" alt="ok"></td>
+    </tr>
+    <tr>
+      <td>success</td>
+      <td>#44cc11</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=success&amp;color=success&amp;scale=1" alt="success"></td>
+    </tr>
+    <tr>
+      <td>informational</td>
+      <td>#007ec6</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=informational&amp;color=informational&amp;scale=1" alt="informational"></td>
+    </tr>
+    <tr>
+      <td>inactive</td>
+      <td>#9f9f9f</td>
+      <td><img src="https://api.jm26.net/badge?label=&amp;message=inactive&amp;color=inactive&amp;scale=1" alt="inactive"></td>
+    </tr>
+  </tbody>
+</table>
+
 
 </details>
 
@@ -208,7 +302,7 @@ E.g. `https://api.jm26.net/badge/beta?status=password` - The result will be a JS
 
 <details>
 <summary>Click to view example</summary>
-```json
+<code class="language-json">
 {
   "status": "ok",
   "warnings": 0,
@@ -255,7 +349,7 @@ E.g. `https://api.jm26.net/badge/beta?status=password` - The result will be a JS
     "icons path": "./font-awesome.woff"
   }
 }
-```
+<code>
 </details>
 
 #### Status Viewer
