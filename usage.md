@@ -56,12 +56,33 @@ $scale = 15; // Image scale (Higher = Better quality, but bigger file size.)
 $maxScale = 100; // Maximum image scale
 $resizeOutput = false; // Downscale the output image to the original size. (!Reduces quality!) -->
 
-| Parameter | Default Value |
-| --------- | ------------- |
-| label     | Documentation |
-| message   | go.jm26.net/badge-docs |
-| color     | #97CA00 |
-| icon      | `&#xf09b;` (f09b - GitHub) |
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Default Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>label</td>
+      <td>Documentation</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>go.jm26.net/badge-docs</td>
+    </tr>
+    <tr>
+      <td>color</td>
+      <td>#97CA00</td>
+    </tr>
+    <tr>
+      <td>icon</td>
+      <td><code>&#xf09b;</code> (f09b - GitHub)</td>
+    </tr>
+  </tbody>
+</table>
+
 
 E.g. `https://api.jm26.net/badge?label=Hello&message=World`
 
@@ -131,7 +152,7 @@ PHP-Badges supports HEX color codes and some color names:
     <tr>
       <td>brighgreen</td>
       <td>#44cc11</td>
-      <td><img src="https://api.jm26.net/badge?label=&amp;message=brighgreen&amp;color=brighgreen&amp;scale=1" alt="brighgreen"></td>
+      <td><img src="https://api.jm26.net/badge/?label=&amp;message=brightgreen&amp;color=brightgreen&amp;scale=1" alt="brighgreen"></td>
     </tr>
     <tr>
       <td>cyan</td>
@@ -171,12 +192,12 @@ PHP-Badges supports HEX color codes and some color names:
     <tr>
       <td>black</td>
       <td>#000000</td>
-      <td><img src="https://api.jm26.net/badge?label=&amp;message=black&amp;color=black&amp;scale=1" alt="black"></td>
+      <td><img src="https://api.jm26.net/badge/beta?label=&amp;message=black&amp;color=black&amp;scale=1" alt="black"></td>
     </tr>
     <tr>
       <td>white</td>
       <td>#ffffff</td>
-      <td><img src="https://api.jm26.net/badge?label=&amp;message=white&amp;color=white&amp;scale=1" alt="white"></td>
+      <td><img src="https://api.jm26.net/badge/beta?label=&amp;message=white&amp;color=white&amp;scale=1&fontcolor=black" alt="white"></td>
     </tr>
     <tr>
       <td>critical</td>
@@ -375,8 +396,6 @@ If you have any questions, or issues, feel free to open an issue on [GitHub](htt
 <p style="text-align: center;">Made with ❤️ by <a href="https://jm26.net">JMcrafter26</a></p>
 <p style="text-align: center; color: #aaa; font-size: 0.8em;">
 Enjoying PHP-BADGES? Show some love by liking and sharing this repository or support me by <a href="https://www.buymeacoffee.com/JM26.NET" target="_blank">buying me a coffee ☕</a>
-
-***
-
-[GitHub](https://github.com/jmcrafter26/php-badges)
-[Releases](https://github.com/jmcrafter26/php-badges/release/latest)
+</p>
+<a href="https://github.com/jmcrafter26/php-badges" target="_blank"><img src="https://api.jm26.net/badge?g&label=Github&icon=f09b&message=Repository&color=007EC6" height="20px" alt="Github Repository" ></a>
+<a href="https://github.com/jmcrafter26/php-badges/release/latest" target="_blank"><img src="https://api.jm26.net/badge?g&label=Github&icon=f09b&message=Releases&color=238636" height="20px" alt="Github Releases" ></a>
