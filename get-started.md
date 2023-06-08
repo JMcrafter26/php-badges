@@ -50,7 +50,7 @@ To generate a badge with different settings, simply add the following query para
 - `color` - The color of the badge (e.g. `green`, `red`, ok, important, ff69b4, etc.)
 - (optional) `url` - The URL to an external json file to get the badge settings from (see [External JSON](./features#external-json) for more info)
 
-#### Examples
+#### Examples (quality was reduced due to the image being resized)
 
 - Standard Badge
 
@@ -79,5 +79,5 @@ Enjoying PHP-BADGES? Show some love by liking and sharing this repository or sup
 
 ----
 
-[GitHub]: https://github.com/jmcrafter26/php-badges
-[Releases]: https://github.com/jmcrafter26/php-badges/release/latest
+[GitHub](https://github.com/jmcrafter26/php-badges)
+[Releases](https://github.com/jmcrafter26/php-badges/release/latest)
