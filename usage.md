@@ -29,6 +29,7 @@ After you have installed PHP-Badges, you can start using it.
     - [Image Scale](#image-scale)
     - [Label Color](#label-color)
     - [Font Color](#font-color)
+      - [Auto Font Color](#auto-font-color)
     - [Cache Lifetime](#cache-lifetime)
     - [Status of PHP-Badges](#status-of-php-badges)
       - [Status Viewer](#status-viewer)
@@ -298,7 +299,19 @@ To set the font color, use the `fontcolor` parameter.
 
 **Important:** The parameter names are CASE SENSITIVE (e.g. `fontcolor` is valid, but `fontColor` is not).
 
-E.g. `https://api.jm26.net/badge?fontcolor=blue`: ![blue](https://api.jm26.net/badge/beta?scale=1&fontcolor=blue) - There is currently a bug with the font color, so it is not working.
+E.g. `https://api.jm26.net/badge?fontcolor=blue`: ![blue](https://api.jm26.net/badge/beta?scale=1&fontcolor=blue)
+
+#### Auto Font Color
+
+The Auto Font Color is the color of the text on the badge (the label, icon and message) that is automatically chosen based on the background color.
+
+For example, if the background color is to light, the font color will be black and if the background color is to dark, the font color will be white.
+
+This feature is enabled by default, but can be disabled by setting the `autofontcolor` parameter to `false`.
+
+**Important:** The parameter names are CASE SENSITIVE (e.g. `autofontcolor` is valid, but `autofontColor` is not).
+
+E.g. `https://api.jm26.net/badge?autofontcolor=false&color=FFE99A`: ![autofontcolor=false](https://api.jm26.net/badge?scale=1&autofontcolor=false&color=FFE99A)
 
 ### Cache Lifetime
 
@@ -397,5 +410,5 @@ If you have any questions, or issues, feel free to open an issue on [GitHub](htt
 <p style="text-align: center; color: #aaa; font-size: 0.8em;">
 Enjoying PHP-BADGES? Show some love by liking and sharing this repository or support me by <a href="https://www.buymeacoffee.com/JM26.NET" target="_blank">buying me a coffee ☕</a>
 </p>
-<a href="https://github.com/jmcrafter26/php-badges" target="_blank"><img src="https://api.jm26.net/badge?g&label=Github&icon=f09b&message=Repository&color=007EC6" height="20px" alt="Github Repository" ></a>
-<a href="https://github.com/jmcrafter26/php-badges/release/latest" target="_blank"><img src="https://api.jm26.net/badge?g&label=Github&icon=f09b&message=Releases&color=238636" height="20px" alt="Github Releases" ></a>
+<a href="https://github.com/jmcrafter26/php-badges" target="_blank"><img src="https://api.jm26.net/badge?g&label=Github&icon=f09b&message=Repository&color=007EC6&scale=1" height="20px" alt="Github Repository" ></a>
+<a href="https://github.com/jmcrafter26/php-badges/release/latest" target="_blank"><img src="https://api.jm26.net/badge?g&label=Github&icon=f09b&message=Releases&color=238636&scale=1" height="20px" alt="Github Releases" ></a>
