@@ -284,120 +284,45 @@ if (!file_exists($icons)) {
 }
 
 
-
-if (isset($_GET['dyn']) && $_GET['dyn'] != '') {
+if (isset($_GET['url']) && !empty($_GET['url'])) {
     // A dynamic badge is requested with parameters like shields.io e.g. /github/stars/:user/:repo
-    $dyn = $_GET['dyn'];
-    $dyn = htmlspecialchars($dyn);
 
-    // if $dyn starts with a slash, remove it
-    if (substr($dyn, 0, 1) == '/') {
-        $dyn = substr($dyn, 1);
-    }
-
-    // if $dyn ends with a slash, remove it
-    if (substr($dyn, -1) == '/') {
-        $dyn = substr($dyn, 0, -1);
-    }
-
-    // if $dyn ends with .json, remove it
-    if (substr($dyn, -5) == '.json') {
-        $dyn = substr($dyn, 0, -5);
-    }
-
-    // get the json from the shields.io api
-    $json = file_get_contents('https://img.shields.io/' . $dyn . '.json');
-    $json = json_decode($json, true);
-    $dmis = true;
-
-        // check if the json is valid
-        if ($json == null) {
-            $label = 'Error';
-            $message = 'Invalid JSON';
-            $messageColor = 'red';
-        } else {
-            // check if the json has the required keys
-            if (array_key_exists('label', $json) or array_key_exists('message', $json) or array_key_exists('color', $json) or array_key_exists('value', $json)){
-                $label = $json['label'];
-if(!isset($json['message']) and isset ($json['value'])) {
-$message = $json['value'];
-} else {
-                $message = $json['message'];
-}
-
-                $jsonFormat = $_GET['format'];
-                $jsonFormat = strtolower($jsonFormat);
-                if ($jsonFormat == 'low') {
-                    $label = strtolower($label);
-                    $message = strtolower($message);
-                } elseif ($jsonFormat == 'up') {
-                    $label = strtoupper($label);
-                    $message = strtoupper($message);
-                } elseif ($jsonFormat == 'cap') {
-                    $label = ucwords($label);
-                    $message = ucwords($message);
-                } elseif ($jsonFormat == 'capf') {
-                    $label = ucfirst($label);
-                    $message = ucfirst($message);
-                } elseif ($jsonFormat == 'low-l') {
-                    $label = strtolower($label);
-                } elseif ($jsonFormat == 'up-l') {
-                    $label = strtoupper($label);
-                } elseif ($jsonFormat == 'cap-l') {
-                    $label = ucwords($label);
-                } elseif ($jsonFormat == 'capf-l') {
-                    $label = ucfirst($label);
-                } elseif ($jsonFormat == 'low-m') {
-                    $message = strtolower($message);
-                } elseif ($jsonFormat == 'up-m') {
-                    $message = strtoupper($message);
-                } elseif ($jsonFormat == 'cap-m') {
-                    $message = ucwords($message);
-                } elseif ($jsonFormat == 'capf-m') {
-                    $message = ucfirst($message);
-                }
-
-
-                $jsonColor = $json['color'];
-                // lowercase the color
-                $jsonColor = strtolower($jsonColor);
-                $messageColor = ${'color_' . $jsonColor};
-                if ($messageColor == '') {
-                    if (preg_match('/^[a-f 0-9]{6}$/i', $jsonColor)) {
-                        $messageColor = $jsonColor;
-                        $messageColor = '#' . $messageColor;
-                    } else {
-                        // $messageColor = '#e05d44';
-                    }
-                }
-            } else {
-                $label = 'Error';
-                $message = 'Invalid JSON (No Data)';
-                $messageColor = 'red';
-            }
-        }
-    
-    
-}
-
-
-// get url json
-if (isset($_GET['url']) && !isset($_GET['dyn']) && $_GET['url'] != '') {
     $url = $_GET['url'];
     $url = htmlspecialchars($url);
-    $json = file_get_contents($url);
 
-//$json = htmlspecialchars($json);
-    $json = json_decode($json, true);
-    $dmis = false;
+    // if the url starts with http
+    if (substr($url, 0, 4) != 'http') {
+
+        // if $url starts with a slash, remove it
+        if (substr($url, 0, 1) == '/') {
+            $url = substr($url, 1);
+        }
+        // if $url ends with a slash, remove it
+        if (substr($url, -1) == '/') {
+            $url = substr($url, 0, -1);
+        }
+        // if $url ends with .json, remove it
+        if (substr($url, -5) == '.json') {
+            $url = substr($url, 0, -5);
+        }
+        // get the json from the shields.io api
+        $url = 'https://img.shields.io/' . $url . '.json';
+    }
 
 
-    // check if url is a valid url
     if (filter_var($url, FILTER_VALIDATE_URL) === false) {
         $label = 'Error';
         $message = 'Invalid URL';
         $messageColor = 'red';
     } else {
+        $json = file_get_contents($url);
+        //$json = htmlspecialchars($json);
+        $json = json_decode($json, true);
+
+        // check if url is a valid url
+
+        $dmis = true;
+
         // check if the json is valid
         if ($json == null) {
             $label = 'Error';
@@ -405,13 +330,13 @@ if (isset($_GET['url']) && !isset($_GET['dyn']) && $_GET['url'] != '') {
             $messageColor = 'red';
         } else {
             // check if the json has the required keys
-            if (array_key_exists('label', $json) or array_key_exists('message', $json) or array_key_exists('color', $json) or array_key_exists('value', $json)){
+            if (array_key_exists('label', $json) or array_key_exists('message', $json) or array_key_exists('color', $json) or array_key_exists('value', $json)) {
                 $label = $json['label'];
-if(!isset($json['message']) and isset ($json['value'])) {
-$message = $json['value'];
-} else {
-                $message = $json['message'];
-}
+                if (!isset($json['message']) and isset($json['value'])) {
+                    $message = $json['value'];
+                } else {
+                    $message = $json['message'];
+                }
 
                 $jsonFormat = $_GET['format'];
                 $jsonFormat = strtolower($jsonFormat);
