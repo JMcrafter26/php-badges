@@ -1,6 +1,8 @@
 # PHP-Badges
 <img alt="Banner" src=".github/banner.jpg">
 
+<img src="https://api.jm26.net/badge?g&icon=f09b&color=44CC11&url=/github/v/release/jmcrafter26/php-badges" height="20px" >
+
 A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-badges/blob/main/.github/optical-difference.jpg?raw=true) <a href="https://shields.io" target="_blank">shields.io</a> 🔥 to generate cool little badges 🌟
 
 <hr>
