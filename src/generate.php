@@ -4,7 +4,7 @@
  * Generate a badge image using PHP GD
  * Author: @JMcrafter26 | https://test.jm26.net/shields-badges | https://github.com/JMcrafter26/php-badges
  * License: MIT
- */ $Version = '1.2.0'; /*
+ */ $Version = '1.3.0'; /*
  * (c) 2023 JM26.NET
  */
 
@@ -22,7 +22,7 @@
 
 // Maintenance mode
 $maintenace = false; // Set to true to enable maintenance mode 
-$maintenacePassword = 'password'; // Password to access the badge while in maintenance mode
+$maintenacePassword = 'CH4NGEtheP4ssw0rd!'; // Password to access the badge while in maintenance mode and to view the status page of the badge generator
 $icon = '&#xf09b;'; // Default Font Awesome icon
 $label = 'Documentation:'; // Default label
 $message = 'go.jm26.net/badge-docs'; // Default message
@@ -33,46 +33,373 @@ $autoFontColor = true; // Automatically change the text color to black or white 
 // Advanced settings
 $imageFormat = 'png'; // Default image format (png, jpg, gif)
 $cacheLife = 5; // Default cache life (in seconds)
-$scale = 20; //Image scale (Higher = Better quality, but bigger file size.)
-$resizeOutput = false; //Downscale the output image to the original size. (!Reduces quality!)
+$scale = 15; // Image scale (Higher = Better quality, but bigger file size.)
+$maxScale = 100; // Maximum image scale
+$resizeOutput = false; // Downscale the output image to the original size. (!Reduces quality!)
 $font = './DejaVuSans.woff'; // Download from https://dejavu-fonts.github.io
 $icons = './font-awesome.woff'; // Download from https://fontawesome.com
 
+
+$dmis = true; //Default Message Is set, had to shorten it ;)
+/* Defining the colors for the graphs. */
+$color_random = '#' . substr(md5(mt_rand()), 0, 6);
+$color_brightgreen = '#44cc11';
+$color_green = '#97CA00';
+$color_yellowgreen = '#a4a61d';
+$color_yellow = '#dfb317';
+$color_orange = '#fe7d37';
+$color_red = '#e05d44';
+$color_lightgrey = '#9f9f9f';
+$color_cyan = '#00eaff';
+$color_blue = '#007ec6';
+$color_violet = '#7b16ff';
+$color_pink = '#ff69b4';
+$color_grey = '#555555';
+$color_silver = '#9f9f9f';
+$color_black = '#000000';
+$color_white = '#ffffff';
+$color_success = '#44cc11';
+$color_ok = '#97CA00';
+$color_important = '#fe7d37';
+$color_critical = '#e05d44';
+$color_informational = '#007ec6';
+$color_inactive = '#9f9f9f';
+$color_highlight = '#dbe300';
+
+// Connection type
+$connection = 'https'; // Only change if there is a problem with https and ssl certificates, e.g. 
 
 /*----------------------------------------------*/
 /* Do not edit anything below this line unless  */
 /*      you know what you are doing!            */
 /*----------------------------------------------*/
+// Update settings
+// Please do not remove or change this code. It is used to count the number of times a badge has been generated and to remind you to update PHP Badges.
+// No personal data is stored or sent to the server!
+$checkForUpdates = true; // To get an update reminder, statistics need to be set to 'true'. Statistics and Updates are using the same endpint!
+
+$_GET = array_change_key_case($_GET, CASE_LOWER); // Make all keys lowercase
+
+// check if the url contains status and the status parameter is set to the password
+if (isset($_GET['status']) && !isset($_GET['message']) && !isset($_GET['label'])) {
+    //check things
+    $status = 'ok';
+    $badgeMessage = $message;
+    $message = '';
+    $warnings = 0;
+
+    // if maintenance mode is enabled, show a warning
+    if ($maintenace) {
+        $status = 'warning';
+        $message .= 'Maintenance mode is enabled/';
+        $warnings++;
+    }
+
+    // check if the php gd extension is installed
+    if (!extension_loaded('gd') && !function_exists('gd_info')) {
+        $status = 'error';
+        $status_gd = 'false';
+        $message .= 'PHP GD extension is not installed/';
+        $warnings++;
+    } else {
+        $status_gd = 'true';
+    }
+    // check if the fonts are downloaded
+    if (!file_exists($font)) {
+        $status = 'error';
+        $status_font = 'false';
+        $message .= 'DejaVuSans.woff is not downloaded/';
+        $warnings++;
+    } else {
+        $status_font = 'true';
+    }
+    if (!file_exists($icons)) {
+        $status = 'error';
+        $status_icons = 'false';
+        $message .= 'font-awesome.woff is not downloaded/';
+        $warnings++;
+    } else {
+        $status_icons = 'true';
+    }
+    // check if is connected to the internet
+    if (!@fsockopen('www.google.com', 80)) {
+        $status_internet = 'offline';
+        $status = 'false';
+        $message .= 'Not connected to the internet/';
+    } else {
+        $status_internet = 'true';
+    }
+    // get server info
+    $server = $_SERVER['SERVER_SOFTWARE'];
+    $server = explode('/', $server);
+    $server = $server[0];
+    // get php version
+    $php = phpversion();
+
+    // check if api.jm26.net/badge is online
+    if (!@fsockopen('api.jm26.net', 80)) {
+        $status_update = 'false';
+        $status = 'error';
+        $message .= 'api.jm26.net/badge is offline/';
+        $warnings++;
+        
+    } else {
+        $status_update = 'true';
+    }
+
+    //check if github repo does not return a 404
+    $github = get_headers($connection . '://raw.githubusercontent.com/JMcrafter26/php-badges/main/README.md');
+    if ($github[0] == 'HTTP/1.1 404 Not Found') {
+        $status_github = 'false';
+        $status = 'error';
+        $message .= 'Github repo not found/';
+        $warnings++;
+    } else {
+        $status_github = 'true';
+    }
+
+    // check for new version
+    $newVersion = file_get_contents($connection . '://raw.githack.com/JMcrafter26/php-badges/main/stable-version.json');
+    // if the file is empty, set the status to error and set the message to 'Could not get the latest version'
+    if ($newVersion == '') {
+        $status = 'error';
+        $message .= 'Could not get the latest version/';
+        $warnings++;
+    }
+    $newVersion = json_decode($newVersion, true);
+    $newVersion = $newVersion['Version']['Stable'];
+    if ($newVersion > $Version) {
+        $status = 'error';
+        $message .= 'New version available/';
+        $warnings++;
+        $updateAvailable = true;
+    } else {
+        $updateAvailable = false;
+    }
+
+    // if checkForUpdates is set to false, set the status to error and set the message to 'Update check disabled'
+    if ($checkForUpdates == false) {
+        $status = 'error';
+        $message .= 'Update check disabled';
+        $warnings++;
+    }
+    if ($warnings == 0) {
+        $message = 'Everything is working fine!';
+    } 
+
+    $json = array(
+        "status" => $status,
+        "warnings" => $warnings,
+        "message" => $message,
+        "version" => array(
+            "current version" => $Version,
+            "newest version" => $newVersion,
+            "update available" => $updateAvailable,
+            "check for updates" => $checkForUpdates,
+            "update url" => "https://github.com/JMcrafter26/php-badges/releases/latest"
+        ),
+        "server" => array(
+        "server" => $server,
+        "php" => $php,
+        "directory" => getcwd(),
+        "file" => __FILE__,
+        "host" => $_SERVER['SERVER_NAME'],
+        "ip" => $_SERVER['SERVER_ADDR'],
+        "gd extension" => $status_gd
+        ),
+        "assets" => array(
+            "font" => $status_font,
+            "icons" => $status_icons
+        ),
+        "external services" => array(
+            "internet" => $status_internet,
+            "github repo" => $status_github,
+            "update server" => $status_update
+        ),
+        "configuration" => array(
+            "maintenance mode" => $maintenace,
+            "icon" => $icon,
+            "label" => $label,
+            "message" => $badgeMessage,
+            "label color" => $labelColor,
+            "message color" => $messageColor,
+            "color text" => $colorText,
+            "auto font color" => $autoFontColor,
+            "image format" => $imageFormat,
+            "cachelife" => $cacheLife,
+            "scale" => $scale,
+            "resize output" => $resizeOutput,
+            "font path" => $font,
+            "icons path" => $icons,
+        )
+
+    );
+    if ($_GET['status'] == $maintenacePassword) {
+    header('Content-Type: application/json');
+    $json = json_encode($json, JSON_PRETTY_PRINT);
+    echo $json;
+    die();
+
+    } else {
+        $dmis = false;
+        $label = 'Status';
+        $message = $json['status'];
+        if ($json['status'] == 'ok') {
+            $color = $color_ok;
+        } else {
+            $color = $color_critical;
+        }
+        if($_GET['status'] == 'json') {
+            header('Content-Type: application/json');
+            $json = array(
+                "status" => $status,
+                "version" => $Version,
+                "gitHub" => "https://github.com/JMcrafter26/php-badges/releases/latest"
+            );
+            die(json_encode($json, JSON_PRETTY_PRINT));
+        }
+    }
+}
+
 
 //Check if the maintenance mode is enabled
 if ($maintenace == true && $_GET['password'] != $maintenacePassword) {
     header('Content-Type: image/png');
-    readfile('https://i.imgur.com/iR3RI3Q.png'); // Download this image from https://api.jm26.net/badge/notice.png if imgur took it down.
+    readfile($connection . '://i.imgur.com/iR3RI3Q.png'); // Download this image from https://api.jm26.net/badge/notice.png if imgur took it down.
     header('HTTP/1.0 503 Service Unavailable');
+    die();
+}
+
+// check if the php gd extension is installed
+if (!extension_loaded('gd') && !function_exists('gd_info')) {
+    header('Content-Type: image/png');
+    readfile($connection . '://i.imgur.com/S8dD7GE.png'); // Download this image from https://api.jm26.net/badge/err-ext.png if imgur took it down.
+    header('HTTP/1.0 500 Internal Server Error');
     die();
 }
 
 /* Checking if the fonts are downloaded, if they are not, it will download them. */
 if (!file_exists($font)) {
-    $fontDwnl = file_get_contents('https://api.jm26.net/badge/DejaVuSans.woff'); // This version of DejaVuSans.woff is modified to work with this script. Official version: https://dejavu-fonts.github.io
-        file_put_contents($font, $fontDwnl);
+    $fontDwnl = file_get_contents($connection . '://api.jm26.net/badge/DejaVuSans.woff'); // This version of DejaVuSans.woff is modified to work with this script. Official version: https://dejavu-fonts.github.io
+    file_put_contents($font, $fontDwnl);
     if (!file_exists($font)) {
         header('Content-Type: image/png');
-        readfile('https://i.imgur.com/QfttAR6.png'); // Download this image from https://api.jm26.net/badge/err-font.png if imgur took it down.
+        readfile($connection . '://i.imgur.com/QfttAR6.png'); // Download this image from https://api.jm26.net/badge/err-font.png if imgur took it down.
     }
 }
 if (!file_exists($icons)) {
-    $iconsDwnl = file_get_contents('https://api.jm26.net/badge/font-awesome.woff'); // This version of font-awesome.woff is modified to work with this script. Official version: https://fontawesome.com
-        file_put_contents($icons, $iconsDwnl);
+    $iconsDwnl = file_get_contents($connection . '://api.jm26.net/badge/font-awesome.woff'); // This version of font-awesome.woff is modified to work with this script. Official version: https://fontawesome.com
+    file_put_contents($icons, $iconsDwnl);
     if (!file_exists($icons)) {
         header('Content-Type: image/png');
-        readfile('https://i.imgur.com/QfttAR6.png'); // Download this image from https://api.jm26.net/badge/err-font.png if imgur took it down.
+        readfile($connection . '://i.imgur.com/QfttAR6.png'); // Download this image from https://api.jm26.net/badge/err-font.png if imgur took it down.
     }
 }
 
 
-$dmis = true; //Default Message Is set, had to shorten it ;)
+if (isset($_GET['url']) && !empty($_GET['url'])) {
+    // A dynamic badge is requested with parameters like shields.io e.g. /github/stars/:user/:repo
 
+    $url = $_GET['url'];
+    $url = htmlspecialchars($url);
+
+    // if the url starts with http
+    if (substr($url, 0, 4) != 'http') {
+
+        // if $url starts with a slash, remove it
+        if (substr($url, 0, 1) == '/') {
+            $url = substr($url, 1);
+        }
+        // if $url ends with a slash, remove it
+        if (substr($url, -1) == '/') {
+            $url = substr($url, 0, -1);
+        }
+        // if $url ends with .json, remove it
+        if (substr($url, -5) == '.json') {
+            $url = substr($url, 0, -5);
+        }
+        // get the json from the shields.io api
+        $url = $connection . '://img.shields.io/' . $url . '.json';
+    }
+
+
+    if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+        $label = 'Error';
+        $message = 'Invalid URL';
+        $messageColor = 'red';
+    } else {
+        $json = file_get_contents($url);
+        //$json = htmlspecialchars($json);
+        $json = json_decode($json, true);
+
+        $dmis = false;
+
+        // check if the json is valid
+        if ($json == null) {
+            $label = 'Error';
+            $message = 'Invalid JSON';
+            $messageColor = 'red';
+        } else {
+            // check if the json has the required keys
+            if (array_key_exists('label', $json) or array_key_exists('message', $json) or array_key_exists('color', $json) or array_key_exists('value', $json)) {
+                $label = $json['label'];
+                if (!isset($json['message']) and isset($json['value'])) {
+                    $message = $json['value'];
+                } else {
+                    $message = $json['message'];
+                }
+
+                // Format Parameters to lowercase, uppercase, capitalize, etc.
+                $jsonFormat = $_GET['format'];
+                $jsonFormat = strtolower($jsonFormat);
+                if ($jsonFormat == 'low') {
+                    $label = strtolower($label);
+                    $message = strtolower($message);
+                } elseif ($jsonFormat == 'up') {
+                    $label = strtoupper($label);
+                    $message = strtoupper($message);
+                } elseif ($jsonFormat == 'cap') {
+                    $label = ucwords($label);
+                    $message = ucwords($message);
+                } elseif ($jsonFormat == 'capf') {
+                    $label = ucfirst($label);
+                    $message = ucfirst($message);
+                } elseif ($jsonFormat == 'low-l') {
+                    $label = strtolower($label);
+                } elseif ($jsonFormat == 'up-l') {
+                    $label = strtoupper($label);
+                } elseif ($jsonFormat == 'cap-l') {
+                    $label = ucwords($label);
+                } elseif ($jsonFormat == 'capf-l') {
+                    $label = ucfirst($label);
+                } elseif ($jsonFormat == 'low-m') {
+                    $message = strtolower($message);
+                } elseif ($jsonFormat == 'up-m') {
+                    $message = strtoupper($message);
+                } elseif ($jsonFormat == 'cap-m') {
+                    $message = ucwords($message);
+                } elseif ($jsonFormat == 'capf-m') {
+                    $message = ucfirst($message);
+                }
+
+                $jsonColor = $json['color'];
+                // lowercase the color
+                $jsonColor = strtolower($jsonColor);
+                $messageColor = ${'color_' . $jsonColor};
+                if ($messageColor == '') {
+                    if (preg_match('/^[a-f 0-9]{6}$/i', $jsonColor)) {
+                        $messageColor = $jsonColor;
+                        $messageColor = '#' . $messageColor;
+                    }
+                }
+            } else {
+                $label = 'Error';
+                $message = 'Invalid JSON (No Data)';
+                $messageColor = 'red';
+            }
+        }
+    }
+}
 
 /* Checking if the label and message are set. If they are, it sets the  variable to false. */
 if (isset($_GET['label'])) {
@@ -89,13 +416,20 @@ if (isset($_GET['message'])) {
 /* Checking if the icon is set, if it is, it will set the icon to the unicode value. If it is not set,
 it will set the icon to a square with a X in it. */
 if (isset($_GET['icon'])) {
+    // if icon is empty, don't display it
+    if (empty($_GET['icon'])) {
+        $icon = '';
+    } else {
     // All icons are listed here: https://fontawesome.com/v5/cheatsheet/free/brands
+    $icon = htmlspecialchars($_GET['icon']);
+
     $icon = '&#x' . $_GET['icon'] . ';';
     //check if unicode is valid, dislay a invalid box
     if (mb_check_encoding($icon, 'UTF-8') === false) {
         $icon = '&';
     } elseif (strlen($icon) != 8) {
         $icon = '&';
+    }
     }
 } elseif ($dmis == false) {
     $icon = '';
@@ -106,6 +440,7 @@ if (isset($_GET['icon'])) {
 the variables to the user's input. If they haven't, it sets the variables to the default values. */
 if (isset($_GET['format'])) {
     $imageFormat = $_GET['format'];
+    $imageFormat = htmlspecialchars($imageFormat);
     $imageFormat = strtolower($imageFormat);
     if ($imageFormat != 'png' && $imageFormat != 'jpg' && $imageFormat != 'gif') {
         $imageFormat = 'png';
@@ -113,7 +448,7 @@ if (isset($_GET['format'])) {
 }
 if (isset($_GET['scale'])) {
     $scale = $_GET['scale'];
-    if (!is_numeric($scale) || $scale > 100) {
+    if (!is_numeric($scale) || $scale > $maxScale || $scale < 0.1) {
         $scale = 20;
     }
 }
@@ -136,30 +471,6 @@ if (isset($_GET['cache'])) {
 }
 
 
-/* Defining the colors for the graphs. */
-$color_brightgreen = '#44cc11';
-$color_green = '#97CA00';
-$color_yellowgreen = '#a4a61d';
-$color_yellow = '#dfb317';
-$color_orange = '#fe7d37';
-$color_red = '#e05d44';
-$color_lightgrey = '#9f9f9f';
-$color_cyan = '#00eaff';
-$color_blue = '#007ec6';
-$color_violet = '#7b16ff';
-$color_pink = '#ff69b4';
-$color_grey = '#555555';
-$color_silver = '#9f9f9f';
-$color_success = '#44cc11';
-$color_ok = '#97CA00';
-$color_important = '#fe7d37';
-$color_critical = '#e05d44';
-$color_informational = '#007ec6';
-$color_inactive = '#9f9f9f';
-$color_highlight = '#dbe300';
-
-
-
 
 /* Checking if the color is set and if it is not empty. If it is not empty, it will lowercase the
 color. */
@@ -167,6 +478,7 @@ if (isset($_GET['color']) && $_GET['color'] != '') {
     //lowercase color
     $_GET['color'] = strtolower($_GET['color']);
     $messageColor = ${'color_' . $_GET['color']};
+    $messageColor = htmlspecialchars($messageColor);
     if ($messageColor == '') {
         if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['color'])) {
             $messageColor = $_GET['color'];
@@ -176,10 +488,12 @@ if (isset($_GET['color']) && $_GET['color'] != '') {
         }
     }
 }
+
 if (isset($_GET['labelcolor']) && $_GET['labelcolor'] != '') {
     //lowercase color
     $_GET['labelcolor'] = strtolower($_GET['labelcolor']);
     $labelColor = ${'color_' . $_GET['labelcolor']};
+    $labelColor = htmlspecialchars($labelColor);
     if ($labelColor == '') {
         if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['labelcolor'])) {
             $labelColor = $_GET['labelcolor'];
@@ -197,6 +511,7 @@ if (isset($_GET['fontcolor']) && $_GET['fontcolor'] != '') {
     //lowercase color
     $_GET['fontcolor'] = strtolower($_GET['fontcolor']);
     $colorText = ${'color_' . $_GET['fontcolor']};
+    $colorText = htmlspecialchars($colorText);
     if ($colorText == '') {
         if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['fontcolor'])) {
             $colorText = $_GET['fontcolor'];
@@ -210,9 +525,9 @@ if (isset($_GET['fontcolor']) && $_GET['fontcolor'] != '') {
 /* Checking if the value of the GET variable 'autofontcolor' is 'false' or 'true'. If it is 'false', it
 sets the variable  to false. If it is 'true', it sets the variable  to
 true. */
-if ($_GET['autofontcolor'] == 'false') {
+if (isset($_GET['autofontcolor']) && $_GET['autofontcolor'] == 'false') {
     $autoFontColor = false;
-} elseif ($_GET['autofontcolor'] == 'true') {
+} elseif (isset($_GET['autofontcolor']) && $_GET['autofontcolor'] == 'true') {
     $autoFontColor = true;
 }
 
@@ -220,7 +535,15 @@ if ($_GET['autofontcolor'] == 'false') {
 if (isset($icon) && $icon != '') {
     $bbox = imagettfbbox((9 * $scale), 0, $font, $label);
     $labelWidth = $bbox[2] - $bbox[0];
-    $labelWidth += (21 * $scale);
+    // There is a bug with the scale and the icon. This is a temporary fix.
+    if (isset($_GET['scale'])) {
+    $bbox = imagettfbbox(15, 0, $icons, $icon);
+    } else {
+    $bbox = imagettfbbox((1.06 * $scale), 0, $icons, $icon);
+    }
+    $iconWidth = $bbox[2] - $bbox[0];
+    $labelWidth += ($iconWidth * $scale);
+    
     $bbox = imagettfbbox((9 * $scale), 0, $font, $message);
     $messageWidth = $bbox[2] - $bbox[0];
     $imWidth = $labelWidth + $messageWidth + (15 * $scale);
@@ -249,7 +572,7 @@ $messageColorHex = $messageColor;
 $messageColor = imagecolorallocate($im, hexdec(substr($messageColor, 1, 2)), hexdec(substr($messageColor, 3, 2)), hexdec(substr($messageColor, 5, 2)));
 $labelColorHex = $labelColor;
 $labelColor = imagecolorallocate($im, hexdec(substr($labelColor, 1, 2)), hexdec(substr($labelColor, 3, 2)), hexdec(substr($labelColor, 5, 2)));
-
+$labelColorText = $colorText;
 
 /* Creating the badge. */
 imagefilledrectangle($im, 0, 0, $imWidth, $imHeight, $messageColor);
@@ -257,6 +580,7 @@ imagefilledrectangle($im, 0, 0, $labelWidth + (5 * $scale), $imHeight, $labelCol
 
 /* Checking if the font color is set, and if it is not, it is setting the font color to black or white
 depending on the brightness of the background color. */
+// if (isset($_GET['fontcolor']) && $_GET['fontcolor'] != '') {
 if ($_GET['fontcolor'] == '' && $autoFontColor == true) {
     $brightness = (hexdec(substr($labelColorHex, 1, 2)) * 0.299) + (hexdec(substr($labelColorHex, 3, 2)) * 0.587) + (hexdec(substr($labelColorHex, 5, 2)) * 0.114);
     if ($brightness > 165) {
@@ -274,7 +598,8 @@ if (isset($icon) && $icon != '') {
     // now draw label after icon with offset of 14px (icon width) + 5px (padding)
     $bbox = imagettfbbox((9 * $scale), 0, $font, $label);
     $textWidth = $bbox[2] - $bbox[0];
-    imagettftext($im, (9 * $scale), 0, (21 * $scale), (14 * $scale), $labelColorText, $font, $label);
+    // draw label with a bit of padding after the icon ($iconWidth * $scale) + (5 * $scale)
+    imagettftext($im, (9 * $scale), 0, ($iconWidth * $scale) + (1 * $scale), (14 * $scale), $labelColorText, $font, $label);
     // imagettftext(image| size,  |angle| x          | y            |    color, |fontfile| text)
 } else {
     $bbox = imagettfbbox((9 * $scale), 0, $font, $label);
@@ -285,7 +610,8 @@ if (isset($icon) && $icon != '') {
 /* Checking if the font color is set to auto. If it is, it will check the brightness of the background
 color. If the brightness is greater than 165, it will set the font color to black. If the brightness
 is less than 165, it will set the font color to white. */
-if ($_GET['fontcolor'] == '' && $autoFontColor == true) {
+// if (isset ($_GET['fontcolor']) && $_GET['fontcolor'] != '' && $autoFontColor == true) {
+if ($_GET['fontcolor'] == '' && $autoFontColor == true) { 
     $brightness = (hexdec(substr($messageColorHex, 1, 2)) * 0.299) + (hexdec(substr($messageColorHex, 3, 2)) * 0.587) + (hexdec(substr($messageColorHex, 5, 2)) * 0.114);
     if ($brightness > 165) {
         $colorText = imagecolorallocate($im, 0, 0, 0);
@@ -314,6 +640,9 @@ if ($resizeOutput == true) {
 
 
 // Check if image is valid and output header 200 or 400
+// get the image size
+$imWidth = imagesx($im);
+$imHeight = imagesy($im);
 if ($imWidth > 1 && $imHeight > 1) {
     header('HTTP/1.1 200 OK');
 } else {
@@ -323,14 +652,14 @@ if ($imWidth > 1 && $imHeight > 1) {
     exit;
 }
 
+
+
 /* Setting the header for the image for better accessibility. */
 header('Content-Disposition: inline; filename="' . $label . '-' . $message . '(PHP-Badges).' . $imageFormat . '"; alt="' . $label . ' ' . $message . '"');
 
 /* Setting the content type to image/png and then outputting the image. */
 header('Content-Type: image/' . $imageFormat);
 imagepng($im);
-
-
 
 /* Destroying the image. (This is not needed, but it is good practice.) */
 imagedestroy($im);
@@ -341,13 +670,12 @@ imagedestroy($im);
 // Please do not remove or change this code. It is used to count the number of times a badge has been generated and to remind you to update PHP Badges.
 // No personal data is stored or sent to the server!
 
-$statistics = true; // To get an update reminder, statistics need to be set to 'true'. Statistics and Updates are using the same endpint!
-if ($statistics) {
+if ($checkForUpdates) {
     $statisticsUrl = 'https://api.jm26.net/badge/statistics.php?exp=' . md5('statistics' . date('h-i-d-m-Y')) . '&v=' . $Version; //please do not change this url, else it won't work :(
-    $statistics = file_get_contents($statisticsUrl);
-    if ($statistics != 'success' && file_exists('./PLEASE-UPDATE-PHP-BADGES.txt') == false) {
+    $checkForUpdates = file_get_contents($statisticsUrl);
+    if ($checkForUpdates != 'success' && file_exists('./PLEASE-UPDATE-PHP-BADGES.txt') == false) {
         $file = fopen('./PLEASE-UPDATE-PHP-BADGES.txt', 'w');
-        fwrite($file, 'A new version is available. Please update PHP Badges to the latest version. \n You can download the latest version at https://github.com/JMcrafter26/php-badges/releases/latest \n  \n Happy coding! timestamp: ' . time() . ' Current version: ' . $Version . ' Newest Version: ' . $statistics . '');
+        fwrite($file, 'A new version is available. Please update PHP Badges to the latest version. \n You can download the latest version at https://github.com/JMcrafter26/php-badges/releases/latest \n  \n Happy coding! timestamp: ' . time() . ' Current version: ' . $Version . ' Newest Version: ' . $checkForUpdates . '');
         fclose($file);
         chmod('./PLEASE-UPDATE-PHP-BADGES.txt', 770);
     } elseif (file_exists('./PLEASE-UPDATE-PHP-BADGES.txt') == true) {
@@ -355,7 +683,6 @@ if ($statistics) {
         unlink('./PLEASE-UPDATE-PHP-BADGES.txt');
     }
 }
-
 exit;
 
 // if you see this go to https://go.jm26.net/badges-easteregg to see something cool
