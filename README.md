@@ -1,7 +1,7 @@
 # PHP-Badges
 <img alt="Banner" src=".github/banner.jpg">
 
-A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-badges/blob/main/.github/optical-difference.PNG?raw=true) <a href="https://shields.io" target="_blank">shields.io</a> 🔥 to generate cool little badges 🌟
+A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-badges/blob/main/.github/optical-difference.jpg?raw=true) <a href="https://shields.io" target="_blank">shields.io</a> 🔥 to generate cool little badges 🌟
 
 <hr>
 
@@ -16,6 +16,8 @@ A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-ba
 <img src="https://api.jm26.net/badge/?label=HEX%20color&message=support&color=0596a3&resizeoutput=false" height="20px" alt="HEX color support">
 <img src="https://api.jm26.net/badge/statistics?resizeoutput=false" height="20px" alt="Statistics">
 <img src="https://api.jm26.net/badge/beta?g&icon=f09b&format=png&scale=20&resizeoutput=false" height="20px" alt=" ">
+<img src="https://api.jm26.net/badge/beta?url=https://raw.githubusercontent.com/JMcrafter26/status/master/api/badge-api/uptime.json&label=Badge%20API%20Uptime" height="20px" alt=" ">
+<img src="https://api.jm26.net/badge?g&label=Dynamic&icon=f209&message=Badges&color=7B16FF" height="20px" alt="Dynamic Badges" >
 
 </div>
 
@@ -24,45 +26,36 @@ A 🔧 simple PHP Badge generator, [like*](https://github.com/JMcrafter26/php-ba
 ## Features 🌟
 
 - Very simple 😌
-- Many [features](https://github.com/JMcrafter26/php-badges/wiki/Features-and-Usage) 🤯
-- Lightweight 💪
+- Many [features](https://php-badges.rf.gd/php-badges/usage) 🤯
+- Lightweight (~5kb minimized) 💪
+- Supports multiple formats (png, jpg, svg) 📦
+- Dynamic Badges 🔄 [examples](https://php-badges.rf.gd/php-badges/usage#dynamic-url)
 - Highly customizable 🎨
 - Font Awesome icon support <img height="20" src="https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/brands/font-awesome.svg?sanitize=true" alt="Font Awesome" style="vertical-align: middle;">
 - Create Badges using a simple [Web GUI](https://test.jm26.net/Badge-generator) 📌
-- Host it yourself! (Or [use mine](https://github.com/JMcrafter26/php-badges/wiki/Get-started-(without-server)) 🌐)
+- Host it yourself! (Or [use mine](https://php-badges.rf.gd/php-badges/usage) 🌐)
 - No setup required, just upload and go 🚀
-- More coming soon! 🔜
-- All Feature and Usage Instructions listed [here](https://github.com/JMcrafter26/php-badges/wiki/Features-and-Usage) 📑
+- Regular updates! 🔜
+- All Feature and Usage Instructions listed [here](https://php-badges.rf.gd/php-badges/usage) 📑
 
 
-## [Badge Generator ↗](https://jmcrafter26.github.io/php-badges/generate)
+## [Badge Generator ↗](https://test.jm26.net/badge-generator/)
 The site allows you to generate a Badge very easy and with a simple GUI.🧩
 
 ## Installation
 
 Here is the (yet unfinished) documentation: **[Documentation](https://jmcrafter26.github.io/php-badges/)**
 
-## Notice
-
-~**PLEASE NOTE: I am a student and I'll have my exams soon, so I propably won't have time for this.*** -But after the exams (June) I will continue working on this, I promise ^^~
-
-**EDIT:** My finals are over and now I have time again :)
-
 ## Working on 👨‍💻
 
-- <img src="https://api.jm26.net/badge/?label=JSON&message=input&color=yellow&resizeoutput=false" height="20px" alt="JSON input">
-
-
-### Almost Finished 🙌:
-
-- URL and Json input 
+- [x] ~~Dynamic Badges~~
 
 ## Thanks to
 - Me [(JMcrafter26)](https://test.jm26.net/list) for the code 😁
 - [DejaVu Fonts](https://dejavu-fonts.github.io/) for the nice font
 - [icons8](https://icons8.com) for the super cool icons
 - [Font Awesome](https://fontawesome.com) for the icons on the badges
-- [Shields.io](https://shields.io) for the json api (Hint: New release soon!)
+- [Shields.io](https://shields.io) for the json api
 
 <br/>
 
