@@ -1,5 +1,17 @@
 # Changelog <img src="https://api.jm26.net/badge?g&label=Change&message=Log&color=0062cc&format=png&scale=20&autofontcolor=true&resizeoutput=false" height="20px" alt="Change Log">
 
+## 12. Jun 2023
+
+- Added support for dynamic labels and messages (json urls)
+- Added support for shields.io dynamic api
+- Added support to customize the dynamic badge style (capitalization, UpperCase, LowerCase, etc.)
+- Added a badge status (public and private - with password and more information)
+- Added more colors
+- Fixed a bug where the badge font color was not changing
+- Fixed a bug where the badge auto font color was not working
+- Fixed a bug (twice) where the badge icon and the label would touch each other (now the badge width dynamically changes based on the icon)
+- Added Case insensitive parameters
+
 ## 08. Feb 2023
 
 Managed to create a new release 
