@@ -46,7 +46,7 @@ The site allows you to generate a Badge very easy and with a simple GUI.🧩
 
 ## Installation
 
-Here is the (yet unfinished) documentation: **[Documentation](https://jmcrafter26.github.io/php-badges/)**
+Here is the (yet unfinished) documentation: **[Documentation](https://php-badges.rf.gd/)**
 
 ## Working on 👨‍💻
 
