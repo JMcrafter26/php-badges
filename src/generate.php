@@ -4,7 +4,7 @@
  * Generate a badge image using PHP GD
  * Author: @JMcrafter26 | https://test.jm26.net/shields-badges | https://github.com/JMcrafter26/php-badges
  * License: MIT
- */ $Version = '1.3.0'; /*
+ */ $Version = '1.3.1'; /*
  * (c) 2023 JM26.NET
  */
 
@@ -40,7 +40,7 @@ $font = './DejaVuSans.woff'; // Download from https://dejavu-fonts.github.io
 $icons = './font-awesome.woff'; // Download from https://fontawesome.com
 
 
-$dmis = true; //Default Message Is set, had to shorten it ;)
+$defaultMessageIsSet = true; //Default Message Is set, had to shorten it ;)
 /* Defining the colors for the graphs. */
 $color_random = '#' . substr(md5(mt_rand()), 0, 6);
 $color_brightgreen = '#44cc11';
@@ -142,7 +142,6 @@ if (isset($_GET['status']) && !isset($_GET['message']) && !isset($_GET['label'])
         $status = 'error';
         $message .= 'api.jm26.net/badge is offline/';
         $warnings++;
-        
     } else {
         $status_update = 'true';
     }
@@ -185,7 +184,7 @@ if (isset($_GET['status']) && !isset($_GET['message']) && !isset($_GET['label'])
     }
     if ($warnings == 0) {
         $message = 'Everything is working fine!';
-    } 
+    }
 
     $json = array(
         "status" => $status,
@@ -199,13 +198,13 @@ if (isset($_GET['status']) && !isset($_GET['message']) && !isset($_GET['label'])
             "update url" => "https://github.com/JMcrafter26/php-badges/releases/latest"
         ),
         "server" => array(
-        "server" => $server,
-        "php" => $php,
-        "directory" => getcwd(),
-        "file" => __FILE__,
-        "host" => $_SERVER['SERVER_NAME'],
-        "ip" => $_SERVER['SERVER_ADDR'],
-        "gd extension" => $status_gd
+            "server" => $server,
+            "php" => $php,
+            "directory" => getcwd(),
+            "file" => __FILE__,
+            "host" => $_SERVER['SERVER_NAME'],
+            "ip" => $_SERVER['SERVER_ADDR'],
+            "gd extension" => $status_gd
         ),
         "assets" => array(
             "font" => $status_font,
@@ -235,13 +234,12 @@ if (isset($_GET['status']) && !isset($_GET['message']) && !isset($_GET['label'])
 
     );
     if ($_GET['status'] == $maintenacePassword) {
-    header('Content-Type: application/json');
-    $json = json_encode($json, JSON_PRETTY_PRINT);
-    echo $json;
-    die();
-
+        header('Content-Type: application/json');
+        $json = json_encode($json, JSON_PRETTY_PRINT);
+        echo $json;
+        die();
     } else {
-        $dmis = false;
+        $defaultMessageIsSet = false;
         $label = 'Status';
         $message = $json['status'];
         if ($json['status'] == 'ok') {
@@ -249,7 +247,7 @@ if (isset($_GET['status']) && !isset($_GET['message']) && !isset($_GET['label'])
         } else {
             $color = $color_critical;
         }
-        if($_GET['status'] == 'json') {
+        if ($_GET['status'] == 'json') {
             header('Content-Type: application/json');
             $json = array(
                 "status" => $status,
@@ -332,7 +330,7 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
         //$json = htmlspecialchars($json);
         $json = json_decode($json, true);
 
-        $dmis = false;
+        $defaultMessageIsSet = false;
 
         // check if the json is valid
         if ($json == null) {
@@ -350,36 +348,38 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
                 }
 
                 // Format Parameters to lowercase, uppercase, capitalize, etc.
-                $jsonFormat = $_GET['format'];
-                $jsonFormat = strtolower($jsonFormat);
-                if ($jsonFormat == 'low') {
-                    $label = strtolower($label);
-                    $message = strtolower($message);
-                } elseif ($jsonFormat == 'up') {
-                    $label = strtoupper($label);
-                    $message = strtoupper($message);
-                } elseif ($jsonFormat == 'cap') {
-                    $label = ucwords($label);
-                    $message = ucwords($message);
-                } elseif ($jsonFormat == 'capf') {
-                    $label = ucfirst($label);
-                    $message = ucfirst($message);
-                } elseif ($jsonFormat == 'low-l') {
-                    $label = strtolower($label);
-                } elseif ($jsonFormat == 'up-l') {
-                    $label = strtoupper($label);
-                } elseif ($jsonFormat == 'cap-l') {
-                    $label = ucwords($label);
-                } elseif ($jsonFormat == 'capf-l') {
-                    $label = ucfirst($label);
-                } elseif ($jsonFormat == 'low-m') {
-                    $message = strtolower($message);
-                } elseif ($jsonFormat == 'up-m') {
-                    $message = strtoupper($message);
-                } elseif ($jsonFormat == 'cap-m') {
-                    $message = ucwords($message);
-                } elseif ($jsonFormat == 'capf-m') {
-                    $message = ucfirst($message);
+                if (isset($_GET['format']) && $_GET['format'] != '') {
+                    $jsonFormat = $_GET['format'];
+                    $jsonFormat = strtolower($jsonFormat);
+                    if ($jsonFormat == 'low') {
+                        $label = strtolower($label);
+                        $message = strtolower($message);
+                    } elseif ($jsonFormat == 'up') {
+                        $label = strtoupper($label);
+                        $message = strtoupper($message);
+                    } elseif ($jsonFormat == 'cap') {
+                        $label = ucwords($label);
+                        $message = ucwords($message);
+                    } elseif ($jsonFormat == 'capf') {
+                        $label = ucfirst($label);
+                        $message = ucfirst($message);
+                    } elseif ($jsonFormat == 'low-l') {
+                        $label = strtolower($label);
+                    } elseif ($jsonFormat == 'up-l') {
+                        $label = strtoupper($label);
+                    } elseif ($jsonFormat == 'cap-l') {
+                        $label = ucwords($label);
+                    } elseif ($jsonFormat == 'capf-l') {
+                        $label = ucfirst($label);
+                    } elseif ($jsonFormat == 'low-m') {
+                        $message = strtolower($message);
+                    } elseif ($jsonFormat == 'up-m') {
+                        $message = strtoupper($message);
+                    } elseif ($jsonFormat == 'cap-m') {
+                        $message = ucwords($message);
+                    } elseif ($jsonFormat == 'capf-m') {
+                        $message = ucfirst($message);
+                    }
                 }
 
                 $jsonColor = $json['color'];
@@ -405,12 +405,12 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
 if (isset($_GET['label'])) {
     $label = $_GET['label'];
     $label = htmlspecialchars($label);
-    $dmis = false;
+    $defaultMessageIsSet = false;
 }
 if (isset($_GET['message'])) {
     $message = $_GET['message'];
     $message = htmlspecialchars($message);
-    $dmis = false;
+    $defaultMessageIsSet = false;
 }
 
 /* Checking if the icon is set, if it is, it will set the icon to the unicode value. If it is not set,
@@ -420,18 +420,18 @@ if (isset($_GET['icon'])) {
     if (empty($_GET['icon'])) {
         $icon = '';
     } else {
-    // All icons are listed here: https://fontawesome.com/v5/cheatsheet/free/brands
-    $icon = htmlspecialchars($_GET['icon']);
+        // All icons are listed here: https://fontawesome.com/v5/cheatsheet/free/brands
+        $icon = htmlspecialchars($_GET['icon']);
 
-    $icon = '&#x' . $_GET['icon'] . ';';
-    //check if unicode is valid, dislay a invalid box
-    if (mb_check_encoding($icon, 'UTF-8') === false) {
-        $icon = '&';
-    } elseif (strlen($icon) != 8) {
-        $icon = '&';
+        $icon = '&#x' . $_GET['icon'] . ';';
+        //check if unicode is valid, dislay a invalid box
+        if (mb_check_encoding($icon, 'UTF-8') === false) {
+            $icon = '&';
+        } elseif (strlen($icon) != 8) {
+            $icon = '&';
+        }
     }
-    }
-} elseif ($dmis == false) {
+} elseif ($defaultMessageIsSet == false) {
     $icon = '';
 }
 
@@ -477,14 +477,16 @@ color. */
 if (isset($_GET['color']) && $_GET['color'] != '') {
     //lowercase color
     $_GET['color'] = strtolower($_GET['color']);
-    $messageColor = ${'color_' . $_GET['color']};
-    $messageColor = htmlspecialchars($messageColor);
-    if ($messageColor == '') {
-        if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['color'])) {
-            $messageColor = $_GET['color'];
-            $messageColor = '#' . $messageColor;
-        } else {
+    // check if it is a color code or a color name
+    if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['color'])) {
+        $messageColor = $_GET['color'];
+        $messageColor = '#' . $messageColor;
+    } else {
+        // check if such color variable exists, if not, set it to red
+        if (!isset(${'color_' . $_GET['color']})) {
             $messageColor = '#e05d44';
+        } else {
+            $messageColor = ${'color_' . $_GET['color']};
         }
     }
 }
@@ -492,14 +494,16 @@ if (isset($_GET['color']) && $_GET['color'] != '') {
 if (isset($_GET['labelcolor']) && $_GET['labelcolor'] != '') {
     //lowercase color
     $_GET['labelcolor'] = strtolower($_GET['labelcolor']);
-    $labelColor = ${'color_' . $_GET['labelcolor']};
-    $labelColor = htmlspecialchars($labelColor);
-    if ($labelColor == '') {
-        if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['labelcolor'])) {
-            $labelColor = $_GET['labelcolor'];
-            $labelColor = '#' . $labelColor;
-        } else {
+    // check if it is a color code or a color name
+    if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['labelcolor'])) {
+        $labelColor = $_GET['labelcolor'];
+        $labelColor = '#' . $labelColor;
+    } else {
+        // check if such color variable exists, if not, set it to white
+        if (!isset(${'color_' . $_GET['labelcolor']})) {
             $labelColor = '#555555';
+        } else {
+            $labelColor = ${'color_' . $_GET['labelcolor']};
         }
     }
 }
@@ -510,14 +514,16 @@ color. If it is not, it will set the color to white. */
 if (isset($_GET['fontcolor']) && $_GET['fontcolor'] != '') {
     //lowercase color
     $_GET['fontcolor'] = strtolower($_GET['fontcolor']);
-    $colorText = ${'color_' . $_GET['fontcolor']};
-    $colorText = htmlspecialchars($colorText);
-    if ($colorText == '') {
-        if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['fontcolor'])) {
-            $colorText = $_GET['fontcolor'];
-            $colorText = '#' . $colorText;
-        } else {
+    // check if it is a color code or a color name
+    if (preg_match('/^[a-f 0-9]{6}$/i', $_GET['fontcolor'])) {
+        $colorText = $_GET['fontcolor'];
+        $colorText = '#' . $colorText;
+    } else {
+        // check if such color variable exists, if not, set it to white
+        if (!isset(${'color_' . $_GET['fontcolor']})) {
             $colorText = '#ffffff';
+        } else {
+            $colorText = ${'color_' . $_GET['fontcolor']};
         }
     }
 }
@@ -537,13 +543,13 @@ if (isset($icon) && $icon != '') {
     $labelWidth = $bbox[2] - $bbox[0];
     // There is a bug with the scale and the icon. This is a temporary fix.
     if (isset($_GET['scale'])) {
-    $bbox = imagettfbbox(15, 0, $icons, $icon);
+        $bbox = imagettfbbox(15, 0, $icons, $icon);
     } else {
-    $bbox = imagettfbbox((1.06 * $scale), 0, $icons, $icon);
+        $bbox = imagettfbbox((1.06 * $scale), 0, $icons, $icon);
     }
     $iconWidth = $bbox[2] - $bbox[0];
     $labelWidth += ($iconWidth * $scale);
-    
+
     $bbox = imagettfbbox((9 * $scale), 0, $font, $message);
     $messageWidth = $bbox[2] - $bbox[0];
     $imWidth = $labelWidth + $messageWidth + (15 * $scale);
@@ -581,7 +587,7 @@ imagefilledrectangle($im, 0, 0, $labelWidth + (5 * $scale), $imHeight, $labelCol
 /* Checking if the font color is set, and if it is not, it is setting the font color to black or white
 depending on the brightness of the background color. */
 // if (isset($_GET['fontcolor']) && $_GET['fontcolor'] != '') {
-if ($_GET['fontcolor'] == '' && $autoFontColor == true) {
+if (!isset($_GET['fontcolor']) && $autoFontColor == true) {
     $brightness = (hexdec(substr($labelColorHex, 1, 2)) * 0.299) + (hexdec(substr($labelColorHex, 3, 2)) * 0.587) + (hexdec(substr($labelColorHex, 5, 2)) * 0.114);
     if ($brightness > 165) {
         $labelColorText = imagecolorallocate($im, 0, 0, 0);
@@ -611,7 +617,7 @@ if (isset($icon) && $icon != '') {
 color. If the brightness is greater than 165, it will set the font color to black. If the brightness
 is less than 165, it will set the font color to white. */
 // if (isset ($_GET['fontcolor']) && $_GET['fontcolor'] != '' && $autoFontColor == true) {
-if ($_GET['fontcolor'] == '' && $autoFontColor == true) { 
+if (!isset($_GET['fontcolor']) && $autoFontColor == true) {
     $brightness = (hexdec(substr($messageColorHex, 1, 2)) * 0.299) + (hexdec(substr($messageColorHex, 3, 2)) * 0.587) + (hexdec(substr($messageColorHex, 5, 2)) * 0.114);
     if ($brightness > 165) {
         $colorText = imagecolorallocate($im, 0, 0, 0);
@@ -659,6 +665,13 @@ header('Content-Disposition: inline; filename="' . $label . '-' . $message . '(P
 
 /* Setting the content type to image/png and then outputting the image. */
 header('Content-Type: image/' . $imageFormat);
+
+// Debug -- Added to see error messages
+// header('Content-Type: text/html');
+// print_r(base64_encode($im));
+// exit;
+
+/* Outputting the image. */
 imagepng($im);
 
 /* Destroying the image. (This is not needed, but it is good practice.) */
@@ -675,7 +688,7 @@ if ($checkForUpdates) {
     $checkForUpdates = file_get_contents($statisticsUrl);
     if ($checkForUpdates != 'success' && file_exists('./PLEASE-UPDATE-PHP-BADGES.txt') == false) {
         $file = fopen('./PLEASE-UPDATE-PHP-BADGES.txt', 'w');
-        fwrite($file, 'A new version is available. Please update PHP Badges to the latest version. \n You can download the latest version at https://github.com/JMcrafter26/php-badges/releases/latest \n  \n Happy coding! timestamp: ' . time() . ' Current version: ' . $Version . ' Newest Version: ' . $checkForUpdates . '');
+        fwrite($file, 'A new version is available. Please update PHP Badges to the latest version. \n You can download the latest version at https://github.com/JMcrafter26/php-badges/releases/latest \n  \n Happy coding! timestamp: ' . time() . ' Current version: ' . $Version . ' Newest Version: ' . $checkForUpdates);
         fclose($file);
         chmod('./PLEASE-UPDATE-PHP-BADGES.txt', 770);
     } elseif (file_exists('./PLEASE-UPDATE-PHP-BADGES.txt') == true) {
@@ -685,4 +698,4 @@ if ($checkForUpdates) {
 }
 exit;
 
-// if you see this go to https://go.jm26.net/badges-easteregg to see something cool
+// if you see this go to https://go.jm26.net/badges-easteregg to see something cool :)
