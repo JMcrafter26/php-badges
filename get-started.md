@@ -6,11 +6,11 @@ layout: default
 
 # Get started
 
-We will guide you through the simple Installation process (not shire if this can be even called installation, because of how simple it is)
+We will guide you through the simple Installation process (not sure if this can be even called installation, because of how simple it is)
 
 ## Requirements
 
-- PHP 5.4 or higher
+- PHP 5.4 or higher (Versions tested: 8.0, 8.1 -other versions may also work)
 - The GD extension installed (most PHP installations have this by default)
 - (Optional: A cup of coffee ☕️)
 
