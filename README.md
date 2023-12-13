@@ -50,6 +50,8 @@ Here is the (yet unfinished) documentation: **[Documentation](https://php-badges
 
 ## Working on 👨‍💻
 
+View roadmap [here](https://test.jm26.net/roadmap/public/board/53146a913989d9ff776a89fb22c05977d08a596626c92234eca76a7de031)
+
 - [x] ~~Dynamic Badges~~
 
 ## Thanks to
